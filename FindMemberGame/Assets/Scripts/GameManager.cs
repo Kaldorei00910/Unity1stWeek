@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-<<<<<<< HEAD
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -19,13 +18,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)   
             instance = this;
     }
-=======
-
-public class GameManager : MonoBehaviour
-{
-    public Text timeTxt;
-    float time = 0.00f;
->>>>>>> 5f736782638a58b7c466cd51a727e5d3571deafe
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +31,6 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         timeTxt.text = time.ToString("N2");
     }
-<<<<<<< HEAD
     public void Matched()
     {
         if(firstCard.idx == secondCard.idx)
@@ -56,6 +47,4 @@ public class GameManager : MonoBehaviour
         secondCard = null;
     }
 
-=======
->>>>>>> 5f736782638a58b7c466cd51a727e5d3571deafe
 }
