@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf5cd2ac241736499194eb52eceb5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstCard: {fileID: 0}
+  secondCard: {fileID: 0}
   timeTxt: {fileID: 817228856}
 --- !u!1 &519420028
 GameObject:
