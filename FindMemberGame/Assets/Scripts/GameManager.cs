@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public AudioSource audioSource; //������ �� ������ҽ�
-    public AudioClip failSound;//�ְ��� �ϴ� �����Ŭ��, (������ҽ��� Ŭ���� �ְ� ������Ѿ� ��)
+    public AudioSource audioSource; //음원이 될 오디오소스
+    public AudioClip failSound;//넣고자 하는 오디오클립, (오디오소스에 클립을 넣고 재생시켜야 함)
     public AudioClip successSound;   
 
     public Card firstCard;
@@ -30,16 +30,15 @@ public class GameManager : MonoBehaviour
 
 
 
-    public int cardCount = 16;//ī�� ��ü ����
+    public int cardCount = 16;//카드 전체 갯수
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
     float time = 60.0f;
 
     public Text name_Text;
-    public Text Sname_Text;
 
-    // 60�ʺ��� �ð� ����        
+    // 60초부터 시간 새기        
         
     private void Awake()
     {
@@ -65,56 +64,54 @@ public class GameManager : MonoBehaviour
             timeTxt.color = Color.red;
             audioSource.pitch = 1.4f;
         }
-        // 15�ʰ��Ǹ� ȿ���� ����� Ÿ�̸� �� ����
+        // 15초가되면 효과음 재생과 타이머 색 변경
 
         if (time <= 0.0f)
         {            
             endTxt.SetActive(true);
             Time.timeScale = 0.0f;
-            this.audioSource.Stop();//���� ����� �뷡 ����
+            this.audioSource.Stop();//게임 종료시 노래 정지
         }    
-        // 0�ʰ� �Ǹ� ���� ��
+        // 0초가 되면 게임 끝
         SecondPick(); 
     }
     public void Matched()
     {
         if (firstCard.idx == secondCard.idx)
         {
-            Sname_Text.text = "�����,�̿���,������,������";
-
             firstCard.DestroyCard();
             secondCard.DestroyCard();
-            audioSource.PlayOneShot(successSound);//������ҽ� ���
+            audioSource.PlayOneShot(successSound);//오디오소스 재생
             cardCount -= 2;
-            cardTryCount += 1; //�õ�Ƚ�� ī��Ʈ
-            finalpoint += 10; // ��Ī ���� ����
+            cardTryCount += 1; //시도횟수 카운트
+            finalpoint += 10; // 매칭 성공 점수
 
             if (cardCount == 0)
             {
                 endTxt.SetActive(true); 
                 Time.timeScale = 0.0f;                
                 tryTimeTxt.SetActive(true);
-                tryTimeTxt.GetComponent<Text>().text = "�� " + cardTryCount + "ȸ �õ�";
+                tryTimeTxt.GetComponent<Text>().text = "총 " + cardTryCount + "회 시도";
                 point.SetActive(true);
-                point.GetComponent<Text>().text = (finalpoint + time) + "��";
+                point.GetComponent<Text>().text = (finalpoint + time) + "점";
                 this.audioSource.Stop();
-                // ���� Ŭ����� �õ�Ƚ���� ���� ����
+                // 게임 클리어시 시도횟수와 점수 등장
             }
 
-            Sname_Text.gameObject.SetActive(true); // �̸� text Ȱ��ȭ
         }
         else
         {
-            name_Text.text = "����!!";
+            name_Text.text = "실패!!";
             firstCard.CloseCard();
             secondCard.CloseCard();
-            audioSource.PlayOneShot(failSound);//������ҽ� ���
-            cardTryCount += 1; //�õ�Ƚ�� ī��Ʈ
-            finalpoint -= 2; //��Ī ���� ����
+            audioSource.PlayOneShot(failSound);//오디오소스 재생
+            cardTryCount += 1; //시도횟수 카운트
+            finalpoint -= 2; //매칭 실패 점수
             firstCard.ChangeColor();
             secondCard.ChangeColor();
-            time -= 2.0f;//�������� �� ���½ð��� �� �پ��� 
-            name_Text.gameObject.SetActive(true);
+            time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 
+            name_Text.gameObject.SetActive(true); // 이름 text 활성화
+        }
 
         StopCoroutine("CountDown"); //
         countDown.SetActive(false);
@@ -164,10 +161,6 @@ public class GameManager : MonoBehaviour
         {
             secondPick = true;
         }
-    }
-    public void close_Sname_Text()
-    {
-        Sname_Text.gameObject.SetActive(false);
     }
 
 }

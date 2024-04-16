@@ -61,7 +61,7 @@ public class Card : MonoBehaviour
     void DestroyCardInvoke()
     {
         Destroy(gameObject);
-        GameManager.instance.Sname_Text.gameObject.SetActive(false);
+        GameManager.instance.name_Text.gameObject.SetActive(false);
     }
 
     public void CloseCard()
