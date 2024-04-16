@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public Card secondCard;
 
     public Text timeTxt;
+    public Text name_Text;
+    public Text Sname_Text;
 
     public GameObject endTxt;
     public GameObject tryTimeTxt;
@@ -36,8 +38,6 @@ public class GameManager : MonoBehaviour
     public int finalpoint = 0;
 
     float time = 50.0f;
-
-    public Text name_Text;
 
     // 40초부터 시간 새기        
         
@@ -80,15 +80,18 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
+            Sname_Text.text = "국기웅,이영대,이유신,금재은"; //매칭 성공 시 출력되는 이름
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             audioSource.PlayOneShot(successSound);//오디오소스 재생
             cardCount -= 2;
             cardTryCount += 1; //시도횟수 카운트
             finalpoint += 10; // 매칭 성공 점수
+            Sname_Text.gameObject.SetActive(true); // 성공시 이름 text 활성화
 
             if (cardCount == 0)
             {
+
                 endTxt.SetActive(true); 
                 Time.timeScale = 0.0f;                
                 tryTimeTxt.SetActive(true);
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour
                 point.GetComponent<Text>().text = (finalpoint * time) + "점";
                 this.audioSource.Stop();
                 // 게임 클리어시 시도횟수와 점수 등장
+
             }
 
         }
@@ -111,18 +115,14 @@ public class GameManager : MonoBehaviour
             firstCard.ChangeColor();
             secondCard.ChangeColor();
             time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 
+
+            name_Text.gameObject.SetActive(true); // 실패 text 활성화
         }
 
         StopCoroutine("CountDown"); //
         countDown.SetActive(false);
         firstCard = null;
         secondCard = null;
-        name_Text.gameObject.SetActive(true); // 이름 text 활성화
-    }
-
-    public void close_nameText()
-    {
-        name_Text.gameObject.SetActive(false);
     }
 
     public IEnumerator CountDown()
@@ -162,6 +162,15 @@ public class GameManager : MonoBehaviour
         {
             secondPick = true;
         }
+    }
+
+    public void close_name_Text()
+    {
+        name_Text.gameObject.SetActive(false);
+    }
+    public void close_Sname_Text()
+    {
+        Sname_Text.gameObject.SetActive(false);
     }
 
 }
