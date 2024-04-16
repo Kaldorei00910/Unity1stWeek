@@ -15,6 +15,21 @@ public class Board : MonoBehaviour
         arr = arr.OrderBy(x => Random.Range(0f, 7f)).ToArray();
 
         StartCoroutine(WaitForIt(arr));//코루틴을 사용한 카드의 순차적 배열
+        /*
+        for (int i = 0; i < 16; i++)
+        {
+            GameObject go = Instantiate(card, this.transform);
+
+            float x = (i % 4) * 1.4f - 2.1f;
+            float y = (i / 4) * 1.4f - 3.0f;
+
+            go.transform.position = new Vector2(x, y);
+            go.GetComponent<Card>().Setting(arr[i]);
+
+            // 남은 카드 갯수 
+
+        }*/
+
     }
 
     // Update is called once per frame
