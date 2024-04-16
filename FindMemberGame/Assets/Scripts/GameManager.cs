@@ -55,13 +55,12 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
 
-    }
 
+    }
     public void close_nameText()
     {
         name_Text.gameObject.SetActive(false);
     }
-
     public void close_Sname_Text()
     {
         Sname_Text.gameObject.SetActive(false);
