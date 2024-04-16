@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
             //한번 뒤집은 카드 색상 변경
             firstCard.ChangeColor();
             secondCard.ChangeColor();
+            //매칭실패로 남은 시간 2초 감소
+            time -= 2.0f;
         }
         firstCard = null;
         secondCard = null;
