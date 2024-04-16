@@ -69,5 +69,6 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//카드를 다시 원상태로 돌리고, 회전각을 기본으로 변경
     }
 }
