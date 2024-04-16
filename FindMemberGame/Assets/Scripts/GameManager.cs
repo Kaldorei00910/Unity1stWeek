@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
+using static UnityEngine.ParticleSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,16 +32,15 @@ public class GameManager : MonoBehaviour
     private float startTime;
     bool secondPick = false;
 
-
-
     public int cardCount = 16;//카드 전체 갯수
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
     float time = 50.0f;
 
-    // 40초부터 시간 새기        
-        
+    // 40초부터 시간 새기
+
+
     private void Awake()
     {
         if (instance == null)   
@@ -80,14 +80,16 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
-            Sname_Text.text = "국기웅,이영대,이유신,금재은"; //매칭 성공 시 출력되는 이름
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             audioSource.PlayOneShot(successSound);//오디오소스 재생
             cardCount -= 2;
             cardTryCount += 1; //시도횟수 카운트
             finalpoint += 10; // 매칭 성공 점수
-            Sname_Text.gameObject.SetActive(true); // 성공시 이름 text 활성화
+
+            Debug.Log("이름 확인" + firstCard.nickname);
+            Sname_Text.text = firstCard.nickname; //매칭 성공 시 출력되는 이름
+            Sname_Text.gameObject.SetActive(true); // 성공시 이름 text 활성화 
 
             if (cardCount == 0)
             {
@@ -103,7 +105,7 @@ public class GameManager : MonoBehaviour
 
             }
 
-        }
+        }                
         else
         {
             name_Text.text = "실패!!";

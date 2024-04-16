@@ -14,6 +14,10 @@ public class Card : MonoBehaviour
     public SpriteRenderer frontImage;
 
     public SpriteRenderer backColor;
+
+    public string nickname; // 팀원들 이름
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,47 @@ public class Card : MonoBehaviour
     {
         idx = number;
         frontImage.sprite = Resources.Load<Sprite>($"easy{idx}");
+
+        switch (number)
+        {
+            case 0:
+                nickname = "금재은";
+                break;
+
+            case 1:
+                nickname = "국기웅";
+                break;
+
+            case 2:
+                nickname = "이영대";
+                break;
+
+            case 3:
+                nickname = "이유신";
+                break;
+
+            case 4:
+                nickname = "이유신";
+                break;
+
+            case 5:
+                nickname = "이유신";
+                break;
+
+            case 6:
+                nickname = "이유신";
+                break;
+
+            case 7:
+                nickname = "이유신";
+                break;
+
+            default: //1~7이 아닐 경우 여기로 들어옴.
+                nickname = "아무나";
+                break;
+        }
+
+
     }   
 
     public void OpenCard()
