@@ -10,8 +10,7 @@ public class GameManager : MonoBehaviour
 
     public AudioSource audioSource; //음원이 될 오디오소스
     public AudioClip failSound;//넣고자 하는 오디오클립, (오디오소스에 클립을 넣고 재생시켜야 함)
-    public AudioClip successSound;
-    public AudioClip warningsound;
+    public AudioClip successSound;   
 
     public Card firstCard;
     public Card secondCard;
@@ -35,11 +34,11 @@ public class GameManager : MonoBehaviour
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
-    float time = 50.0f;
+    float time = 60.0f;
 
     public Text name_Text;
 
-    // 40초부터 시간 새기        
+    // 60초부터 시간 새기        
         
     private void Awake()
     {
@@ -61,9 +60,9 @@ public class GameManager : MonoBehaviour
         timeTxt.text = time.ToString("N2");
 
         if (time < 15.0f)
-        {
-            this.audioSource.PlayOneShot(warningsound);
+        {                       
             timeTxt.color = Color.red;
+            audioSource.pitch = 1.3f;
         }
         // 15초가되면 효과음 재생과 타이머 색 변경
 
@@ -94,7 +93,7 @@ public class GameManager : MonoBehaviour
                 tryTimeTxt.SetActive(true);
                 tryTimeTxt.GetComponent<Text>().text = "총 " + cardTryCount + "회 시도";
                 point.SetActive(true);
-                point.GetComponent<Text>().text = (finalpoint * time) + "점";
+                point.GetComponent<Text>().text = (finalpoint + time) + "점";
                 this.audioSource.Stop();
                 // 게임 클리어시 시도횟수와 점수 등장
             }
@@ -111,13 +110,13 @@ public class GameManager : MonoBehaviour
             firstCard.ChangeColor();
             secondCard.ChangeColor();
             time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 
+            name_Text.gameObject.SetActive(true); // 이름 text 활성화
         }
 
         StopCoroutine("CountDown"); //
         countDown.SetActive(false);
         firstCard = null;
-        secondCard = null;
-        name_Text.gameObject.SetActive(true); // 이름 text 활성화
+        secondCard = null;        
     }
 
     public void close_nameText()
