@@ -70,5 +70,13 @@ public class Card : MonoBehaviour
         front.SetActive(false);
         back.SetActive(true);
         this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//카드를 다시 원상태로 돌리고, 회전각을 기본으로 변경
+
+
+        //함수로 바로 불러오기
+        //GameManager.instance.close_nameText();
+
+        //텍스트를 바로 가져오는 방법
+        GameManager.instance.name_Text.gameObject.SetActive(false);
+
     }
 }

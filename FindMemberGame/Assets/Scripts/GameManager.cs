@@ -18,16 +18,18 @@ public class GameManager : MonoBehaviour
     public Text timeTxt;
     float time = 0.0f;
 
+    public Text name_Text;
+
     private void Awake()
     {
-        if (instance == null)   
+        if (instance == null)
             instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
     }
     public void Matched()
     {
-        if(firstCard.idx == secondCard.idx)
+        if (firstCard.idx == secondCard.idx)
         {
             firstCard.DestroyCard();
             secondCard.DestroyCard();
@@ -46,12 +48,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            name_Text.text = "실패!!";
+
             firstCard.CloseCard();
             secondCard.CloseCard();
             audioSource.PlayOneShot(failSound);//오디오소스 재생
         }
         firstCard = null;
         secondCard = null;
+
+        name_Text.gameObject.SetActive(true); // 이름 text 활성화
+
+    }
+
+    public void close_nameText()
+    {
+        name_Text.gameObject.SetActive(false);
     }
 
 }
