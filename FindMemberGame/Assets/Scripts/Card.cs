@@ -36,7 +36,7 @@ public class Card : MonoBehaviour
         back.SetActive(false);
 
         audioSource.PlayOneShot(click);//오디오소스 재생
-        
+
 
         if (GameManager.instance.firstCard == null)
         {
