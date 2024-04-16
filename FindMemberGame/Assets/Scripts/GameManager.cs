@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     float time = 50.0f;
 
     public Text name_Text;
+    public Text Sname_Text;
 
     // 40초부터 시간 새기        
         
@@ -80,6 +81,8 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
+            Sname_Text.text = "국기웅,이영대,이유신,금재은";
+
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             audioSource.PlayOneShot(successSound);//오디오소스 재생
@@ -99,6 +102,7 @@ public class GameManager : MonoBehaviour
                 // 게임 클리어시 시도횟수와 점수 등장
             }
 
+            Sname_Text.gameObject.SetActive(true); // 이름 text 활성화
         }
         else
         {
@@ -111,6 +115,7 @@ public class GameManager : MonoBehaviour
             firstCard.ChangeColor();
             secondCard.ChangeColor();
             time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 
+            name_Text.gameObject.SetActive(true); // 실패 text 활성화
         }
 
         StopCoroutine("CountDown"); //
@@ -162,6 +167,10 @@ public class GameManager : MonoBehaviour
         {
             secondPick = true;
         }
+    }
+    public void close_Sname_Text()
+    {
+        Sname_Text.gameObject.SetActive(false);
     }
 
 }

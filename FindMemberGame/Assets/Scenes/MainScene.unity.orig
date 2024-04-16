@@ -176,6 +176,7 @@ MonoBehaviour:
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   timeTxt: {fileID: 817228856}
+<<<<<<< HEAD
   endTxt: {fileID: 1215979520}
   tryTimeTxt: {fileID: 841282072}
   point: {fileID: 2015253340}
@@ -185,7 +186,6 @@ MonoBehaviour:
   cardTryCount: 0
   finalpoint: 0
   name_Text: {fileID: 2018962993}
-  Sname_Text: {fileID: 1105121782}
 --- !u!82 &119549757
 AudioSource:
   m_ObjectHideFlags: 0
@@ -436,7 +436,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.3529412, g: 0.3529412, b: 0.882353, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -444,7 +444,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &453194408
@@ -463,6 +463,10 @@ Transform:
   - {fileID: 555635816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  name_Text: {fileID: 841282073}
+  Sname_Text: {fileID: 1105121782}
+>>>>>>> matching-Name
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,9 +826,12 @@ RectTransform:
   - {fileID: 817228855}
   - {fileID: 2018962995}
   - {fileID: 841282075}
-  - {fileID: 1105121784}
+<<<<<<< HEAD
   - {fileID: 1215979521}
   - {fileID: 2015253341}
+=======
+  - {fileID: 1105121784}
+>>>>>>> matching-Name
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -990,6 +997,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841282072}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
+=======
+--- !u!224 &841282075
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841282072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 682643946}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 450}
+  m_SizeDelta: {x: 250, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1105121781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1097,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 450}
   m_SizeDelta: {x: 760, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+>>>>>>> matching-Name
 --- !u!1 &1110028137
 GameObject:
   m_ObjectHideFlags: 0
