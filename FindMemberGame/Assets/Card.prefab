@@ -339,10 +339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8f5fc2ed508b34e820bb804c7846f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idx: 0
   front: {fileID: 9047886293447330735}
   back: {fileID: 2291083540533599446}
   anim: {fileID: 636105099797133360}
   frontImage: {fileID: 4374452412846632294}
+  backColor: {fileID: 4898572320361452631}
 --- !u!1 &8029722852548483724
 GameObject:
   m_ObjectHideFlags: 0

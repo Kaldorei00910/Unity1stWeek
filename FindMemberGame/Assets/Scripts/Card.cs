@@ -12,6 +12,8 @@ public class Card : MonoBehaviour
     public Animator anim;
 
     public SpriteRenderer frontImage;
+
+    public SpriteRenderer backColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,5 +68,10 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+    }
+
+    //카드 색상 바꾸는 함수(한 번 뒤집은 카드)
+    public void ChangeColor(){
+        backColor.color = new Color( 29/ 255f,  179/ 255f,  172/ 255f);
     }
 }

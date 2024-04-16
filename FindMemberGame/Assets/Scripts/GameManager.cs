@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
         {
             firstCard.CloseCard();
             secondCard.CloseCard();
+            //한번 뒤집은 카드 색상 변경
+            firstCard.ChangeColor();
+            secondCard.ChangeColor();
         }
         firstCard = null;
         secondCard = null;
