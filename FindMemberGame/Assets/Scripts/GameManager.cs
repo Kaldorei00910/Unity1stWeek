@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public AudioSource audioSource; //À½¿øÀÌ µÉ ¿Àµð¿À¼Ò½º
-    public AudioClip failSound;//³Ö°íÀÚ ÇÏ´Â ¿Àµð¿ÀÅ¬¸³, (¿Àµð¿À¼Ò½º¿¡ Å¬¸³À» ³Ö°í Àç»ý½ÃÄÑ¾ß ÇÔ)
+    public AudioSource audioSource; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½
+    public AudioClip failSound;//ï¿½Ö°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½, (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ ï¿½ï¿½)
     public AudioClip successSound;   
 
     public Card firstCard;
@@ -30,15 +30,16 @@ public class GameManager : MonoBehaviour
 
 
 
-    public int cardCount = 16;//Ä«µå ÀüÃ¼ °¹¼ö
+    public int cardCount = 16;//Ä«ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
     float time = 60.0f;
 
     public Text name_Text;
+    public Text Sname_Text;
 
-    // 60ÃÊºÎÅÍ ½Ã°£ »õ±â        
+    // 60ï¿½Êºï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½        
         
     private void Awake()
     {
@@ -64,54 +65,56 @@ public class GameManager : MonoBehaviour
             timeTxt.color = Color.red;
             audioSource.pitch = 1.4f;
         }
-        // 15ÃÊ°¡µÇ¸é È¿°úÀ½ Àç»ý°ú Å¸ÀÌ¸Ó »ö º¯°æ
+        // 15ï¿½Ê°ï¿½ï¿½Ç¸ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         if (time <= 0.0f)
         {            
             endTxt.SetActive(true);
             Time.timeScale = 0.0f;
-            this.audioSource.Stop();//°ÔÀÓ Á¾·á½Ã ³ë·¡ Á¤Áö
+            this.audioSource.Stop();//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë·¡ ï¿½ï¿½ï¿½ï¿½
         }    
-        // 0ÃÊ°¡ µÇ¸é °ÔÀÓ ³¡
+        // 0ï¿½Ê°ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         SecondPick(); 
     }
     public void Matched()
     {
         if (firstCard.idx == secondCard.idx)
         {
+            Sname_Text.text = "ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½Ì¿ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+
             firstCard.DestroyCard();
             secondCard.DestroyCard();
-            audioSource.PlayOneShot(successSound);//¿Àµð¿À¼Ò½º Àç»ý
+            audioSource.PlayOneShot(successSound);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½
             cardCount -= 2;
-            cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
-            finalpoint += 10; // ¸ÅÄª ¼º°ø Á¡¼ö
+            cardTryCount += 1; //ï¿½Ãµï¿½È½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®
+            finalpoint += 10; // ï¿½ï¿½Äª ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             if (cardCount == 0)
             {
                 endTxt.SetActive(true); 
                 Time.timeScale = 0.0f;                
                 tryTimeTxt.SetActive(true);
-                tryTimeTxt.GetComponent<Text>().text = "ÃÑ " + cardTryCount + "È¸ ½Ãµµ";
+                tryTimeTxt.GetComponent<Text>().text = "ï¿½ï¿½ " + cardTryCount + "È¸ ï¿½Ãµï¿½";
                 point.SetActive(true);
-                point.GetComponent<Text>().text = (finalpoint + time) + "Á¡";
+                point.GetComponent<Text>().text = (finalpoint + time) + "ï¿½ï¿½";
                 this.audioSource.Stop();
-                // °ÔÀÓ Å¬¸®¾î½Ã ½ÃµµÈ½¼ö¿Í Á¡¼ö µîÀå
+                // ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½È½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
 
+            Sname_Text.gameObject.SetActive(true); // ï¿½Ì¸ï¿½ text È°ï¿½ï¿½È­
         }
         else
         {
-            name_Text.text = "½ÇÆÐ!!";
+            name_Text.text = "ï¿½ï¿½ï¿½ï¿½!!";
             firstCard.CloseCard();
             secondCard.CloseCard();
-            audioSource.PlayOneShot(failSound);//¿Àµð¿À¼Ò½º Àç»ý
-            cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
-            finalpoint -= 2; //¸ÅÄª ½ÇÆÐ Á¡¼ö
+            audioSource.PlayOneShot(failSound);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½ï¿½ï¿½
+            cardTryCount += 1; //ï¿½Ãµï¿½È½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®
+            finalpoint -= 2; //ï¿½ï¿½Äª ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             firstCard.ChangeColor();
             secondCard.ChangeColor();
-            time -= 2.0f;//½ÇÆÐÇßÀ» ½Ã ³²´Â½Ã°£ÀÌ ´õ ÁÙ¾îµé°Ô 
-            name_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
-        }
+            time -= 2.0f;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Â½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½ï¿½ 
+            name_Text.gameObject.SetActive(true);
 
         StopCoroutine("CountDown"); //
         countDown.SetActive(false);
@@ -161,6 +164,10 @@ public class GameManager : MonoBehaviour
         {
             secondPick = true;
         }
+    }
+    public void close_Sname_Text()
+    {
+        Sname_Text.gameObject.SetActive(false);
     }
 
 }
