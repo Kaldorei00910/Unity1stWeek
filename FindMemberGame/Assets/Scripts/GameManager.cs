@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     float time = 0.0f;
 
     public Text name_Text;
+    public Text Sname_Text;
 
     private void Awake()
     {
@@ -37,8 +38,11 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
+            Sname_Text.text = "국기웅,이영대,이유신,금재은";
+
             firstCard.DestroyCard();
             secondCard.DestroyCard();
+            Sname_Text.gameObject.SetActive(true); // 이름 text 활성화
         }
         else
         {
@@ -46,17 +50,21 @@ public class GameManager : MonoBehaviour
 
             firstCard.CloseCard();
             secondCard.CloseCard();
+            name_Text.gameObject.SetActive(true); // 실패 text 활성화
         }
         firstCard = null;
         secondCard = null;
-
-        name_Text.gameObject.SetActive(true); // 이름 text 활성화
 
     }
 
     public void close_nameText()
     {
         name_Text.gameObject.SetActive(false);
+    }
+
+    public void close_Sname_Text()
+    {
+        Sname_Text.gameObject.SetActive(false);
     }
 
 }
