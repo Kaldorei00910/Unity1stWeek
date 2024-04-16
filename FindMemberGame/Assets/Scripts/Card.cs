@@ -12,6 +12,8 @@ public class Card : MonoBehaviour
     public Animator anim;
 
     public SpriteRenderer frontImage;
+
+    public SpriteRenderer backColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,8 @@ public class Card : MonoBehaviour
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
+            //5초 내 두 번째 카드 미선택시 뒤집는 함수
+            GameManager.instance.CountFlip();
         }
         else
         {
@@ -78,5 +82,10 @@ public class Card : MonoBehaviour
         //텍스트를 바로 가져오는 방법
         GameManager.instance.name_Text.gameObject.SetActive(false);
 
+    }
+
+    //
+    public void ChangeColor(){
+        backColor.color = new Color( 29/ 255f,  179/ 255f,  172/ 255f);
     }
 }

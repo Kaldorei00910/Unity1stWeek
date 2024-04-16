@@ -17,15 +17,25 @@ public class GameManager : MonoBehaviour
     public Card secondCard;
 
     public Text timeTxt;
+
     public GameObject endTxt;
     public GameObject tryTimeTxt;
     public GameObject point;
+
+
+    public GameObject countDown;
+    public Text countDownTxt;
+    
+    private float startTime;
+    bool secondPick = false;
+
+
 
     public int cardCount = 16;//카드 전체 갯수
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
-    float time = 40.0f;
+    float time = 50.0f;
 
     public Text name_Text;
 
@@ -62,9 +72,9 @@ public class GameManager : MonoBehaviour
             endTxt.SetActive(true);
             Time.timeScale = 0.0f;
             this.audioSource.Stop();//게임 종료시 노래 정지
-        }
-                
+        }    
         // 0초가 되면 게임 끝
+        SecondPick(); 
     }
     public void Matched()
     {
@@ -98,7 +108,13 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(failSound);//오디오소스 재생
             cardTryCount += 1; //시도횟수 카운트
             finalpoint -= 2; //매칭 실패 점수
+            firstCard.ChangeColor();
+            secondCard.ChangeColor();
+            time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 
         }
+
+        StopCoroutine("CountDown"); //
+        countDown.SetActive(false);
         firstCard = null;
         secondCard = null;
         name_Text.gameObject.SetActive(true); // 이름 text 활성화
@@ -107,6 +123,45 @@ public class GameManager : MonoBehaviour
     public void close_nameText()
     {
         name_Text.gameObject.SetActive(false);
+    }
+
+    public IEnumerator CountDown()
+    {
+        countDown.SetActive(true);
+        countDownTxt.text = "5";
+        startTime = Time.realtimeSinceStartup;
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text = "4";
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text = "3";
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text = "2";
+        yield return new WaitForSecondsRealtime(1);
+        countDownTxt.text = "1";
+        yield return new WaitForSecondsRealtime(1);
+        firstCard.CloseCard();
+        countDown.SetActive(false);
+        firstCard = null;
+    }
+
+    public void CountFlip()
+    {
+        if (secondPick == false)
+        {
+            StartCoroutine("CountDown");
+        }
+    }
+
+    public void SecondPick()
+    {
+        if (secondCard == null)
+        {
+            secondPick = false;
+        }
+        else
+        {
+            secondPick = true;
+        }
     }
 
 }
