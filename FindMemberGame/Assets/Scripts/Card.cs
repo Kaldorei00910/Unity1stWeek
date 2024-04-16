@@ -66,5 +66,11 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+
+        //함수로 바로 불러오기
+        //GameManager.instance.close_nameText();
+
+        //텍스트를 바로 가져오는 방법
+        GameManager.instance.name_Text.gameObject.SetActive(false);
     }
 }
