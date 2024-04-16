@@ -171,7 +171,6 @@ MonoBehaviour:
   audioSource: {fileID: 119549758}
   failSound: {fileID: 8300000, guid: cb5f6ec3945b1f54da1d87b2585b9933, type: 3}
   successSound: {fileID: 8300000, guid: 57885376c58b96f48a7a1634c38dfb34, type: 3}
-  warningsound: {fileID: 8300000, guid: 94c303205e9c3f6469969d8095963340, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   timeTxt: {fileID: 817228856}
@@ -862,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.993973, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.8985181, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         if (time < 15.0f)
         {                       
             timeTxt.color = Color.red;
-            audioSource.pitch = 1.3f;
+            audioSource.pitch = 1.4f;
         }
         // 15초가되면 효과음 재생과 타이머 색 변경
 
