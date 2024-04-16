@@ -342,6 +342,7 @@ MonoBehaviour:
   idx: 0
   front: {fileID: 9047886293447330735}
   back: {fileID: 2291083540533599446}
+  countDown: {fileID: 0}
   anim: {fileID: 636105099797133360}
   frontImage: {fileID: 4374452412846632294}
   backColor: {fileID: 4898572320361452631}

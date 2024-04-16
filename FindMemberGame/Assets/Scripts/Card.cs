@@ -40,6 +40,8 @@ public class Card : MonoBehaviour
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
+            //5초 내 두 번째 카드 미선택시 뒤집는 함수
+            GameManager.instance.CountFlip();
         }
         else
         {
