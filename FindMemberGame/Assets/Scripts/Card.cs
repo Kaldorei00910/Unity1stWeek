@@ -5,8 +5,8 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     public int idx = 0;
-    public AudioSource audioSource; //À½¿øÀÌ µÉ ¿Àµğ¿À¼Ò½º
-    public AudioClip click;//³Ö°íÀÚ ÇÏ´Â ¿Àµğ¿ÀÅ¬¸³, (¿Àµğ¿À¼Ò½º¿¡ Å¬¸³À» ³Ö°í Àç»ı½ÃÄÑ¾ß ÇÔ)
+    public AudioSource audioSource; //ìŒì›ì´ ë  ì˜¤ë””ì˜¤ì†ŒìŠ¤
+    public AudioClip click;//ë„£ê³ ì í•˜ëŠ” ì˜¤ë””ì˜¤í´ë¦½, (ì˜¤ë””ì˜¤ì†ŒìŠ¤ì— í´ë¦½ì„ ë„£ê³  ì¬ìƒì‹œì¼œì•¼ í•¨)
     public GameObject front;
     public GameObject back;
 
@@ -38,13 +38,13 @@ public class Card : MonoBehaviour
         front.SetActive(true);
         back.SetActive(false);
 
-        audioSource.PlayOneShot(click);//¿Àµğ¿À¼Ò½º Àç»ı
+        audioSource.PlayOneShot(click);//ì˜¤ë””ì˜¤ì†ŒìŠ¤ ì¬ìƒ
 
 
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
-            //5ÃÊ ³» µÎ ¹øÂ° Ä«µå ¹Ì¼±ÅÃ½Ã µÚÁı´Â ÇÔ¼ö
+            //5ì´ˆ ë‚´ ë‘ ë²ˆì§¸ ì¹´ë“œ ë¯¸ì„ íƒì‹œ ë’¤ì§‘ëŠ” í•¨ìˆ˜
             GameManager.instance.CountFlip();
         }
         else
@@ -75,13 +75,13 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
-        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//Ä«µå¸¦ ´Ù½Ã ¿ø»óÅÂ·Î µ¹¸®°í, È¸Àü°¢À» ±âº»À¸·Î º¯°æ
+        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//ì¹´ë“œë¥¼ ë‹¤ì‹œ ì›ìƒíƒœë¡œ ëŒë¦¬ê³ , íšŒì „ê°ì„ ê¸°ë³¸ìœ¼ë¡œ ë³€ê²½
 
 
-        //ÇÔ¼ö·Î ¹Ù·Î ºÒ·¯¿À±â
+        //í•¨ìˆ˜ë¡œ ë°”ë¡œ ë¶ˆëŸ¬ì˜¤ê¸°
         //GameManager.instance.close_nameText();
 
-        //ÅØ½ºÆ®¸¦ ¹Ù·Î °¡Á®¿À´Â ¹æ¹ı
+        //í…ìŠ¤íŠ¸ë¥¼ ë°”ë¡œ ê°€ì ¸ì˜¤ëŠ” ë°©ë²•
         GameManager.instance.name_Text.gameObject.SetActive(false);
 
     }

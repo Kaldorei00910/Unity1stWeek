@@ -14,7 +14,7 @@ public class Board : MonoBehaviour
         int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         arr = arr.OrderBy(x => Random.Range(0f, 7f)).ToArray();
 
-        StartCoroutine(WaitForIt(arr));//ÄÚ·çÆ¾À» »ç¿ëÇÑ Ä«µåÀÇ ¼øÂ÷Àû ¹è¿­
+        StartCoroutine(WaitForIt(arr));//ì½”ë£¨í‹´ì„ ì‚¬ìš©í•œ ì¹´ë“œì˜ ìˆœì°¨ì  ë°°ì—´
         /*
         for (int i = 0; i < 16; i++)
         {
@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
             go.transform.position = new Vector2(x, y);
             go.GetComponent<Card>().Setting(arr[i]);
 
-            // ³²Àº Ä«µå °¹¼ö 
+            // ë‚¨ì€ ì¹´ë“œ ê°¯ìˆ˜ 
 
         }*/
 
@@ -37,7 +37,7 @@ public class Board : MonoBehaviour
     {
 
     }
-    IEnumerator WaitForIt(int[] arr)//Ä«µå ¹è¿­ÇÔ¼ö(ÄÚ·çÆ¾)
+    IEnumerator WaitForIt(int[] arr)//ì¹´ë“œ ë°°ì—´í•¨ìˆ˜(ì½”ë£¨í‹´)
     {
         for (int i = 0; i < 16; i++)
         {
