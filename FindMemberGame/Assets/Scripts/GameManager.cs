@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0.0f;
             this.audioSource.Stop();//게임 종료시 노래 정지
             switchScript.GetComponent<SwitchColor>().resetList(); //색깔리스트 초기화
+            StopCoroutine("CountDown"); //카운트다운 함수 중지
+            countDown.SetActive(false);
         }    
         // 0초가 되면 게임 끝
         SecondPick(); 
