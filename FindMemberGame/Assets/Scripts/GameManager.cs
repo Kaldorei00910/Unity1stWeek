@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
-    float time = 60.0f;
+    float time = 50.0f;
 
     public Text name_Text;
 
