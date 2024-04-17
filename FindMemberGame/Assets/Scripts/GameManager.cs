@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
 
@@ -29,13 +30,13 @@ public class GameManager : MonoBehaviour
     private float startTime;
     bool secondPick = false;
 
-
+    private bool isGameStart = false;
 
     public int cardCount = 16;//카드 전체 갯수
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
-    float time = 50.0f;
+    float time = 100.0f;
 
     public Text name_Text;
     public Text Sname_Text;
@@ -44,38 +45,56 @@ public class GameManager : MonoBehaviour
         
     private void Awake()
     {
-        if (instance == null)   
-            instance = this;      
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        
         Time.timeScale = 1.0f;
         audioSource = this.gameObject.GetComponent<AudioSource>();
         cardCount = 16;
+        if (!isGameStart)
+        {
+            //SceneManager.LoadScene("TitleScene");
+            isGameStart = false;
+        }
+        StartGame();
     }
         
     void Update()
     {
-        time -= Time.deltaTime;
-        timeTxt.text = time.ToString("N2");
-
-        if (time < 15.0f)
+        if (isGameStart)
         {
-            this.audioSource.PlayOneShot(warningsound);
-            timeTxt.color = Color.red;
-        }
+            time -= Time.deltaTime;
+
+            timeTxt.text = time.ToString("N2");
+
+            if (time < 15.0f)
+            {
+                this.audioSource.PlayOneShot(warningsound);
+                timeTxt.color = Color.red;
+            }
         // 15초가되면 효과음 재생과 타이머 색 변경
 
-        if (time <= 0.0f)
-        {            
-            endTxt.SetActive(true);
-            Time.timeScale = 0.0f;
-            this.audioSource.Stop();//게임 종료시 노래 정지
-        }    
+            if (time <= 0.0f)
+            {
+                endTxt.SetActive(true);
+                Time.timeScale = 0.0f;
+                this.audioSource.Stop();//게임 종료시 노래 정지
+            }    
         // 0초가 되면 게임 끝
-        SecondPick(); 
+            SecondPick(); 
+        }
+
+
+
     }
     public void Matched()
     {
@@ -173,4 +192,11 @@ public class GameManager : MonoBehaviour
         Sname_Text.gameObject.SetActive(false);
     }
 
+    public void StartGame()//게임 시작시 사전설정 함수
+    {
+        isGameStart = true;
+        SceneManager.LoadScene("MainScene");
+        //GameObject timeTxt = GameObject.Find("Timetxt");
+        timeTxt = GameObject.Find("Canvas/TimeTxt").GetComponent<Text>();
+    }
 }
