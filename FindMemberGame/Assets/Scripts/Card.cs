@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public class Card : MonoBehaviour
 {
@@ -86,7 +87,21 @@ public class Card : MonoBehaviour
     }
 
     //
-    public void ChangeColor(){
-        backColor.color = new Color( 29/ 255f,  179/ 255f,  172/ 255f);
+
+    public void ChangeColor(string Backcolor)
+    {
+        if (Backcolor == "green")
+        {
+            backColor.color = new Color( 29f/ 255f, 179f/ 255f, 172f/ 255f);
+        }
+        else if (Backcolor == "red")
+        {
+            backColor.color = new Color( 227f/ 255f, 51f/ 255f, 51f/ 255f);
+        }
+        else if (Backcolor == "black")
+        {
+            backColor.color = new Color( 1f/ 255f, 1f/ 255f, 1f/ 255f);
+        }
+        
     }
 }

@@ -181,6 +181,8 @@ MonoBehaviour:
   point: {fileID: 2015253340}
   countDown: {fileID: 453194406}
   countDownTxt: {fileID: 1319740025}
+  fL: 
+  sL: 
   cardCount: 0
   cardTryCount: 0
   finalpoint: 0
