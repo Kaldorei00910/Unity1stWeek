@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public AudioSource audioSource; //À½¿øÀÌ µÉ ¿Àµğ¿À¼Ò½º
-    public AudioClip failSound;//³Ö°íÀÚ ÇÏ´Â ¿Àµğ¿ÀÅ¬¸³, (¿Àµğ¿À¼Ò½º¿¡ Å¬¸³À» ³Ö°í Àç»ı½ÃÄÑ¾ß ÇÔ)
+    public AudioSource audioSource; //ìŒì›ì´ ë  ì˜¤ë””ì˜¤ì†ŒìŠ¤
+    public AudioClip failSound;//ë„£ê³ ì í•˜ëŠ” ì˜¤ë””ì˜¤í´ë¦½, (ì˜¤ë””ì˜¤ì†ŒìŠ¤ì— í´ë¦½ì„ ë„£ê³  ì¬ìƒì‹œì¼œì•¼ í•¨)
     public AudioClip successSound;
     public AudioClip warningsound;
 
@@ -31,17 +31,17 @@ public class GameManager : MonoBehaviour
     bool secondPick = false;
     
     private float startTime;
-    List<string> GreenPos = new List<string>(); //±×¸°Ä«µå À§Ä¡ ¸®½ºÆ®
-    List<string> RedPos = new List<string>(); //·¹µåÄ«µå À§Ä¡ ¸®½ºÆ®
-    List<string> BlackPos = new List<string>(); //ºí·¢Ä«µå À§Ä¡ ¸®½ºÆ®
+    List<string> GreenPos = new List<string>(); //ê·¸ë¦°ì¹´ë“œ ìœ„ì¹˜ ë¦¬ìŠ¤íŠ¸
+    List<string> RedPos = new List<string>(); //ë ˆë“œì¹´ë“œ ìœ„ì¹˜ ë¦¬ìŠ¤íŠ¸
+    List<string> BlackPos = new List<string>(); //ë¸”ë™ì¹´ë“œ ìœ„ì¹˜ ë¦¬ìŠ¤íŠ¸
 
-    public string fL; //Ã¹¹øÂ° Ä«µå À§Ä¡ ¹®ÀÚ¿­·Î ¹Ş±â
-    public string sL; //µÎ¹øÂ° Ä«µå À§Ä¡ ¹®ÀÚ¿­·Î ¹Ş±â
-    Vector2 fPos; //Ã¹¹øÂ° Ä«µå À§Ä¡
-    Vector2 sPos; //µÎ¹øÂ° Ä«µå À§Ä¡
+    string fL; //ì²«ë²ˆì§¸ ì¹´ë“œ ìœ„ì¹˜ ë¬¸ìì—´ë¡œ ë°›ê¸°
+    string sL; //ë‘ë²ˆì§¸ ì¹´ë“œ ìœ„ì¹˜ ë¬¸ìì—´ë¡œ ë°›ê¸°
+    Vector2 fPos; //ì²«ë²ˆì§¸ ì¹´ë“œ ìœ„ì¹˜
+    Vector2 sPos; //ë‘ë²ˆì§¸ ì¹´ë“œ ìœ„ì¹˜
 
 
-    public int cardCount = 16;//Ä«µå ÀüÃ¼ °¹¼ö
+    public int cardCount = 16;//ì¹´ë“œ ì „ì²´ ê°¯ìˆ˜
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     public Text name_Text;
     public Text Sname_Text;
 
-    // 40ÃÊºÎÅÍ ½Ã°£ »õ±â        
+    // 40ì´ˆë¶€í„° ì‹œê°„ ìƒˆê¸°        
         
     private void Awake()
     {
@@ -76,178 +76,178 @@ public class GameManager : MonoBehaviour
             this.audioSource.PlayOneShot(warningsound);
             timeTxt.color = Color.red;
         }
-        // 15ÃÊ°¡µÇ¸é È¿°úÀ½ Àç»ı°ú Å¸ÀÌ¸Ó »ö º¯°æ
+        // 15ì´ˆê°€ë˜ë©´ íš¨ê³¼ìŒ ì¬ìƒê³¼ íƒ€ì´ë¨¸ ìƒ‰ ë³€ê²½
 
         if (time <= 0.0f)
         {            
             endTxt.SetActive(true);
             Time.timeScale = 0.0f;
-            this.audioSource.Stop();//°ÔÀÓ Á¾·á½Ã ³ë·¡ Á¤Áö
-            GreenPos.Clear(); //¸®½ºÆ® ÃÊ±âÈ­
+            this.audioSource.Stop();//ê²Œì„ ì¢…ë£Œì‹œ ë…¸ë˜ ì •ì§€
+            GreenPos.Clear(); //ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
             RedPos.Clear();
             BlackPos.Clear();
         }    
-        // 0ÃÊ°¡ µÇ¸é °ÔÀÓ ³¡
+        // 0ì´ˆê°€ ë˜ë©´ ê²Œì„ ë
         SecondPick(); 
     }
     public void Matched()
     {
         if (firstCard.idx == secondCard.idx)
         {
-            Sname_Text.text = "±¹±â¿õ,ÀÌ¿µ´ë,ÀÌÀ¯½Å,±İÀçÀº";
+            Sname_Text.text = "êµ­ê¸°ì›…,ì´ì˜ëŒ€,ì´ìœ ì‹ ,ê¸ˆì¬ì€";
 
             firstCard.DestroyCard();
             secondCard.DestroyCard();
-            audioSource.PlayOneShot(successSound);//¿Àµğ¿À¼Ò½º Àç»ı
+            audioSource.PlayOneShot(successSound);//ì˜¤ë””ì˜¤ì†ŒìŠ¤ ì¬ìƒ
             cardCount -= 2;
-            cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
-            finalpoint += 10; // ¸ÅÄª ¼º°ø Á¡¼ö
+            cardTryCount += 1; //ì‹œë„íšŸìˆ˜ ì¹´ìš´íŠ¸
+            finalpoint += 10; // ë§¤ì¹­ ì„±ê³µ ì ìˆ˜
 
             if (cardCount == 0)
             {
                 endTxt.SetActive(true); 
                 Time.timeScale = 0.0f;                
                 tryTimeTxt.SetActive(true);
-                tryTimeTxt.GetComponent<Text>().text = "ÃÑ " + cardTryCount + "È¸ ½Ãµµ";
+                tryTimeTxt.GetComponent<Text>().text = "ì´ " + cardTryCount + "íšŒ ì‹œë„";
                 point.SetActive(true);
-                point.GetComponent<Text>().text = (finalpoint * time) + "Á¡";
+                //float timeì„ int timeìœ¼ë¡œ ë³€ê²½(ì ìˆ˜ì—ì„œ ì†Œìˆ˜ì  ë‹¨ìœ„ ì œì™¸)
+                int timeInt = Mathf.FloorToInt(time);
+                point.GetComponent<Text>().text = (finalpoint * timeInt) + "ì ";
                 this.audioSource.Stop();
-                // °ÔÀÓ Å¬¸®¾î½Ã ½ÃµµÈ½¼ö¿Í Á¡¼ö µîÀå
-                GreenPos.Clear(); //¸®½ºÆ® ÃÊ±âÈ­
+                // ê²Œì„ í´ë¦¬ì–´ì‹œ ì‹œë„íšŸìˆ˜ì™€ ì ìˆ˜ ë“±ì¥
+                GreenPos.Clear(); //ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
                 RedPos.Clear();
                 BlackPos.Clear();
             }
-
-            Sname_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
+            Sname_Text.gameObject.SetActive(true); // ì´ë¦„ text í™œì„±í™”
         }
         else
         {
-            name_Text.text = "½ÇÆĞ!!";
+            name_Text.text = "ì‹¤íŒ¨!!";
             firstCard.CloseCard();
             secondCard.CloseCard();
-            audioSource.PlayOneShot(failSound);//¿Àµğ¿À¼Ò½º Àç»ı
-            cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
-            finalpoint -= 2; //¸ÅÄª ½ÇÆĞ Á¡¼ö
-            time -= 2.0f;//½ÇÆĞÇßÀ» ½Ã ³²´Â½Ã°£ÀÌ ´õ ÁÙ¾îµé°Ô 
-            name_Text.gameObject.SetActive(true); // ½ÇÆĞ text È°¼ºÈ­
+            audioSource.PlayOneShot(failSound);//ì˜¤ë””ì˜¤ì†ŒìŠ¤ ì¬ìƒ
+            cardTryCount += 1; //ì‹œë„íšŸìˆ˜ ì¹´ìš´íŠ¸
+            finalpoint -= 2; //ë§¤ì¹­ ì‹¤íŒ¨ ì ìˆ˜
+            time -= 2.0f;//ì‹¤íŒ¨í–ˆì„ ì‹œ ë‚¨ëŠ”ì‹œê°„ì´ ë” ì¤„ì–´ë“¤ê²Œ 
+            name_Text.gameObject.SetActive(true); // ì‹¤íŒ¨ text í™œì„±í™”
             
-            fPos = firstCard.transform.position; //Ã¹¹øÂ° Ä«µå À§Ä¡
-            fL = "'" + fPos + "'"; //À§Ä¡¸¦ ¹®ÀÚ¿­·Î º¯°æ
-            sPos = secondCard.transform.position; //Ã¹¹øÂ° Ä«µå À§Ä¡
-            sL = "'" + sPos + "'"; //À§Ä¡¸¦ ¹®ÀÚ¿­·Î º¯°æ
+            fPos = firstCard.transform.position; //ì²«ë²ˆì§¸ ì¹´ë“œ ìœ„ì¹˜
+            fL = "'" + fPos + "'"; //ìœ„ì¹˜ë¥¼ ë¬¸ìì—´ë¡œ ë³€ê²½
+            sPos = secondCard.transform.position; //ì²«ë²ˆì§¸ ì¹´ë“œ ìœ„ì¹˜
+            sL = "'" + sPos + "'"; //ìœ„ì¹˜ë¥¼ ë¬¸ìì—´ë¡œ ë³€ê²½
 
-            //µÎ Ä«µå ÀüºÎ Èò»ö,
+            //ë‘ ì¹´ë“œ ì „ë¶€ í°ìƒ‰,
             if (!GreenPos.Contains(fL) && !GreenPos.Contains(sL) && !RedPos.Contains(fL) && !RedPos.Contains(sL) && !BlackPos.Contains(fL) && !BlackPos.Contains(sL))
             {
-                GreenPos.Add(fL); //Ã¹¹øÂ° Ä«µåÀ§Ä¡ ±×¸°¸®½ºÆ®¿¡ Ãß°¡
-                firstCard.ChangeColor("green"); //Ã¹ Ä«µå ±×¸°»ö»ó
-                GreenPos.Add(sL); //µÎ¹øÂ° Ä«µåÀ§Ä¡ ±×¸°¸®½ºÆ®¿¡ Ãß°¡
+                GreenPos.Add(fL); //ì²«ë²ˆì§¸ ì¹´ë“œìœ„ì¹˜ ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                firstCard.ChangeColor("green"); //ì²« ì¹´ë“œ ê·¸ë¦°ìƒ‰ìƒ
+                GreenPos.Add(sL); //ë‘ë²ˆì§¸ ì¹´ë“œìœ„ì¹˜ ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 secondCard.ChangeColor("green");
             }
-            else if (GreenPos.Contains(fL) && GreenPos.Contains(sL)) //µÑ´Ù ±×¸°,
+            else if (GreenPos.Contains(fL) && GreenPos.Contains(sL)) //ë‘˜ë‹¤ ê·¸ë¦°,
             {
-                RedPos.Add(fL); //Ã¹Â° ·¹µå¸®½ºÆ®¿¡ Ãß°¡
-                GreenPos.Remove(fL);//Ã¹Â° ±×¸°¸®½ºÆ®¿¡¼­ »èÁ¦
-                firstCard.ChangeColor("red"); 
-                RedPos.Add(sL); //µÑÂ° ·¹µå¸®½ºÆ®¿¡ Ãß°¡
+                RedPos.Add(fL); //ì²«ì§¸ ë ˆë“œë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                GreenPos.Remove(fL);//ì²«ì§¸ ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œ
+                firstCard.ChangeColor("red");
+                RedPos.Add(sL); //ë‘˜ì§¸ ë ˆë“œë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 secondCard.ChangeColor("red");
                 GreenPos.Remove(sL);
             }
-            else if (RedPos.Contains(fL) && RedPos.Contains(sL)) //µÑ´Ù ·¹µå,
+            else if (RedPos.Contains(fL) && RedPos.Contains(sL)) //ë‘˜ë‹¤ ë ˆë“œ,
             {
-                BlackPos.Add(fL); //Ã¹Â° ºí·¢¸®½ºÆ®¿¡ Ãß°¡
-                RedPos.Remove(fL);//Ã¹Â° ·¹µå¸®½ºÆ®¿¡¼­ »èÁ¦
+                BlackPos.Add(fL); //ì²«ì§¸ ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                RedPos.Remove(fL);//ì²«ì§¸ ë ˆë“œë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œ
                 firstCard.ChangeColor("black"); 
-                BlackPos.Add(sL); //µÑÂ° ºí·¢¸®½ºÆ®¿¡ Ãß°¡
+                BlackPos.Add(sL); //ë‘˜ì§¸ ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 secondCard.ChangeColor("black");
                 RedPos.Remove(sL);;
             }
-            //Ã¹Â°´Â ±×¸°, µÑÂ°´Â ±×¸°ÀÌ ¾Æ´Ò ¶§
+            //ì²«ì§¸ëŠ” ê·¸ë¦°, ë‘˜ì§¸ëŠ” ê·¸ë¦°ì´ ì•„ë‹ ë•Œ
             else if (GreenPos.Contains(fL) && !GreenPos.Contains(sL)) 
             {
-                RedPos.Add(fL); //Ã¹Â°´Â ·¹µå¸®½ºÆ®¿¡ Ãß°¡
+                RedPos.Add(fL); //ì²«ì§¸ëŠ” ë ˆë“œë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 GreenPos.Remove(fL);
                 firstCard.ChangeColor("red"); 
-                if (!GreenPos.Contains(sL) && !RedPos.Contains(sL) && !BlackPos.Contains(sL)) //µÑÂ°°¡ Èò»öÀÌ¸é,
+                if (!GreenPos.Contains(sL) && !RedPos.Contains(sL) && !BlackPos.Contains(sL)) //ë‘˜ì§¸ê°€ í°ìƒ‰ì´ë©´,
                 {
-                    GreenPos.Add(sL);//±×¸°¸®½ºÆ®¿¡ Ãß°¡
+                    GreenPos.Add(sL);//ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                     secondCard.ChangeColor("green");
                 }
-                else if (RedPos.Contains(sL)) //µÑÂ°°¡ ·¹µåÀÌ¸é,
+                else if (RedPos.Contains(sL)) //ë‘˜ì§¸ê°€ ë ˆë“œì´ë©´,
                 {
-                    BlackPos.Add(sL);//ºí·¢¸®½ºÆ®¿¡ Ãß°¡
-                    RedPos.Remove(sL);//·¹µå¸®½ºÆ®¿¡¼­ Á¦°Å
+                    BlackPos.Add(sL);//ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                    RedPos.Remove(sL);//ë ˆë“œë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°
                     secondCard.ChangeColor("black");
                 }
             }
 
-            //Ã¹Â°´Â ±×¸°ÀÌ ¾Æ´Ï°í, µÑÂ°´Â ±×¸°ÀÏ ¶§
+            //ì²«ì§¸ëŠ” ê·¸ë¦°ì´ ì•„ë‹ˆê³ , ë‘˜ì§¸ëŠ” ê·¸ë¦°ì¼ ë•Œ
             else if (!GreenPos.Contains(fL) && GreenPos.Contains(sL)) 
             {
-                RedPos.Add(sL); //µÑÂ°´Â ·¹µå¸®½ºÆ®¿¡ Ãß°¡
+                RedPos.Add(sL); //ë‘˜ì§¸ëŠ” ë ˆë“œë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 GreenPos.Remove(sL);
                 secondCard.ChangeColor("red"); 
-                if (!GreenPos.Contains(fL) && !RedPos.Contains(fL) && !BlackPos.Contains(fL)) //Ã¹Â°°¡ Èò»öÀÌ¸é,
+                if (!GreenPos.Contains(fL) && !RedPos.Contains(fL) && !BlackPos.Contains(fL)) //ì²«ì§¸ê°€ í°ìƒ‰ì´ë©´,
                 {
-                    GreenPos.Add(fL);//±×¸°¸®½ºÆ®¿¡ Ãß°¡
+                    GreenPos.Add(fL);//ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                     firstCard.ChangeColor("green");
                 }
-                else if (RedPos.Contains(fL)) //Ã¹Â°°¡ ·¹µåÀÌ¸é,
+                else if (RedPos.Contains(fL)) //ì²«ì§¸ê°€ ë ˆë“œì´ë©´,
                 {
-                    BlackPos.Add(fL);//ºí·¢¸®½ºÆ®¿¡ Ãß°¡
-                    RedPos.Remove(fL);//·¹µå¸®½ºÆ®¿¡¼­ Á¦°Å
+                    BlackPos.Add(fL);//ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                    RedPos.Remove(fL);//ë ˆë“œë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°
                     firstCard.ChangeColor("black");
                 }
             }
 
-            //Ã¹Â° ·¹µå, µÑÂ°´Â ·¹µå ¾Æ´Ò ¶§
+            //ì²«ì§¸ ë ˆë“œ, ë‘˜ì§¸ëŠ” ë ˆë“œ ì•„ë‹ ë•Œ
             else if (RedPos.Contains(fL) && !RedPos.Contains(sL)) 
             {
-                BlackPos.Add(fL); //Ã¹Â°´Â ºí·¢¸®½ºÆ®¿¡ Ãß°¡
+                BlackPos.Add(fL); //ì²«ì§¸ëŠ” ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                 RedPos.Remove(fL);
                 firstCard.ChangeColor("black"); 
-                if (!GreenPos.Contains(sL) && !RedPos.Contains(sL) && !BlackPos.Contains(sL)) //µÑÂ°°¡ Èò»öÀÌ¸é,
+                if (!GreenPos.Contains(sL) && !RedPos.Contains(sL) && !BlackPos.Contains(sL)) //ë‘˜ì§¸ê°€ í°ìƒ‰ì´ë©´,
                 {
-                    GreenPos.Add(sL);//±×¸°¸®½ºÆ®¿¡ Ãß°¡
+                    GreenPos.Add(sL);//ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                     secondCard.ChangeColor("green");
                 }
-                else if (GreenPos.Contains(sL)) //µÑÂ°°¡ ±×¸°ÀÌ¸é,
+                else if (GreenPos.Contains(sL)) //ë‘˜ì§¸ê°€ ê·¸ë¦°ì´ë©´,
                 {
-                    RedPos.Add(sL);//·¹µå¸®½ºÆ®¿¡ Ãß°¡
-                    GreenPos.Remove(sL);//±×¸°¸®½ºÆ®¿¡¼­ Á¦°Å
+                    RedPos.Add(sL);//ë ˆë“œë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                    GreenPos.Remove(sL);//ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°
                     secondCard.ChangeColor("red");
                 }
             }
 
-            //Ã¹Â°´Â ·¹µå°¡ ¾Æ´Ï°í, µÑÂ°´Â ·¹µåÀÏ ¶§
+            //ì²«ì§¸ëŠ” ë ˆë“œê°€ ì•„ë‹ˆê³ , ë‘˜ì§¸ëŠ” ë ˆë“œì¼ ë•Œ
             else if (!RedPos.Contains(fL) && RedPos.Contains(sL)) 
             {
-                BlackPos.Add(sL); //µÑÂ°´Â ºí·¢¸®½ºÆ®¿¡ Ãß°¡
-                RedPos.Remove(sL); //·¹µå¸®½ºÆ®¿¡¼­ Á¦°Å
-                secondCard.ChangeColor("black"); //ºí·¢
-                if (!GreenPos.Contains(fL) && !RedPos.Contains(fL) && !BlackPos.Contains(fL)) //Ã¹Â°°¡ Èò»öÀÌ¸é,
+                BlackPos.Add(sL); //ë‘˜ì§¸ëŠ” ë¸”ë™ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                RedPos.Remove(sL); //ë ˆë“œë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°
+                secondCard.ChangeColor("black"); //ë¸”ë™
+                if (!GreenPos.Contains(fL) && !RedPos.Contains(fL) && !BlackPos.Contains(fL)) //ì²«ì§¸ê°€ í°ìƒ‰ì´ë©´,
                 {
-                    GreenPos.Add(fL);//±×¸°¸®½ºÆ®¿¡ Ãß°¡
+                    GreenPos.Add(fL);//ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
                     firstCard.ChangeColor("green");
                 }
-                else if (GreenPos.Contains(fL)) //Ã¹Â°°¡ ±×¸°ÀÌ¸é,
+                else if (GreenPos.Contains(fL)) //ì²«ì§¸ê°€ ê·¸ë¦°ì´ë©´,
                 {
-                    RedPos.Add(fL);//·¹µå¸®½ºÆ®¿¡ Ãß°¡
-                    GreenPos.Remove(fL);//±×¸°¸®½ºÆ®¿¡¼­ Á¦°Å
-                    firstCard.ChangeColor("red");//·¹µå
+                    RedPos.Add(fL);//ë ˆë“œë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
+                    GreenPos.Remove(fL);//ê·¸ë¦°ë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°
+                    firstCard.ChangeColor("red");//ë ˆë“œ
                 }
             }
-            //µÑ ´Ù ºí·¢ÀÌ¸é, °ÔÀÓÁ¾·á
+            //ë‘˜ ë‹¤ ë¸”ë™ì´ë©´, ê²Œì„ì¢…ë£Œ
             else if (BlackPos.Contains(fL) && BlackPos.Contains(sL))
             {
                 BlackOver();
             }
         }
-        StopCoroutine("CountDown"); //Ä«¿îÆ®´Ù¿î ÇÔ¼ö ÁßÁö
+        StopCoroutine("CountDown"); //ì¹´ìš´íŠ¸ë‹¤ìš´ í•¨ìˆ˜ ì¤‘ì§€
         countDown.SetActive(false);
         firstCard = null;
         secondCard = null;
-        name_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
     }
 
     public void close_nameText()
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
         firstCard = null;
     }
 
-    public void CountFlip() //µÎ¹øÂ° Ä«µå ¹Ì¼±ÅÃ½Ã Ä«¿îÆ®´Ù¿î ½ÃÀÛ ÇÔ¼ö
+    public void CountFlip() //ë‘ë²ˆì§¸ ì¹´ë“œ ë¯¸ì„ íƒì‹œ ì¹´ìš´íŠ¸ë‹¤ìš´ ì‹œì‘ í•¨ìˆ˜
     {
         if (secondPick == false)
         {
@@ -282,7 +282,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SecondPick() //µÎ¹øÂ° Ä«µåÀ¯¹« È®ÀÎ
+    public void SecondPick() //ë‘ë²ˆì§¸ ì¹´ë“œìœ ë¬´ í™•ì¸
     {
         if (secondCard == null)
         {
@@ -303,7 +303,7 @@ public class GameManager : MonoBehaviour
         endTxt.SetActive(true); 
         Time.timeScale = 0.0f;
         this.audioSource.Stop();
-        GreenPos.Clear(); //¸®½ºÆ® ÃÊ±âÈ­
+        GreenPos.Clear(); //ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         RedPos.Clear();
         BlackPos.Clear();    
     }
