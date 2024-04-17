@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public AudioClip failSound;//넣고자 하는 오디오클립, (오디오소스에 클립을 넣고 재생시켜야 함)
     public AudioClip successSound;
     public AudioClip warningsound;
+    public AudioClip backGroundMusic;
 
     public Card firstCard;
     public Card secondCard;
@@ -30,13 +31,13 @@ public class GameManager : MonoBehaviour
     private float startTime;
     bool secondPick = false;
 
-    private bool isGameStart = false;
+    public bool isGameStart = false;
 
     public int cardCount = 16;//카드 전체 갯수
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
-    float time = 100.0f;
+    public float time = 100.0f;
 
     public Text name_Text;
     public Text Sname_Text;
@@ -56,16 +57,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         Time.timeScale = 1.0f;
         audioSource = this.gameObject.GetComponent<AudioSource>();
         cardCount = 16;
-        if (!isGameStart)
-        {
-            //SceneManager.LoadScene("TitleScene");
-            isGameStart = false;
-        }
-        StartGame();
     }
         
     void Update()
@@ -73,8 +67,8 @@ public class GameManager : MonoBehaviour
         if (isGameStart)
         {
             time -= Time.deltaTime;
-
             timeTxt.text = time.ToString("N2");
+
 
             if (time < 15.0f)
             {
@@ -92,8 +86,6 @@ public class GameManager : MonoBehaviour
         // 0초가 되면 게임 끝
             SecondPick(); 
         }
-
-
 
     }
     public void Matched()
@@ -192,11 +184,33 @@ public class GameManager : MonoBehaviour
         Sname_Text.gameObject.SetActive(false);
     }
 
-    public void StartGame()//게임 시작시 사전설정 함수
+    public void StartGame()//게임 플레이 화면으로 넘겨주는 코루틴
     {
-        isGameStart = true;
-        SceneManager.LoadScene("MainScene");
-        //GameObject timeTxt = GameObject.Find("Timetxt");
-        timeTxt = GameObject.Find("Canvas/TimeTxt").GetComponent<Text>();
+        StartCoroutine(GameCoroutine());
+    }
+
+    IEnumerator GameCoroutine()
+    {
+        AsyncOperation loadScene = SceneManager.LoadSceneAsync("MainScene");
+
+        while (loadScene != null)
+        {
+            yield return null;
+        }
+    }
+    public void ToMainScreen()
+    {
+        isGameStart = false;
+        StartCoroutine(MainScreenCoroutine());
+    }
+
+    IEnumerator MainScreenCoroutine()
+    {
+        AsyncOperation loadScene = SceneManager.LoadSceneAsync("TitleScene");
+
+        while (loadScene != null)
+        {
+            yield return null;
+        }
     }
 }

@@ -10,7 +10,6 @@ public class StageBtn : MonoBehaviour
     public void GoToGame()
     {
         GameManager.instance.StartGame();//메인 신 전환 및 각종 사전세팅
-        
     }
 
     public void OpenPanal()
