@@ -349,6 +349,8 @@ MonoBehaviour:
   anim: {fileID: 636105099797133360}
   frontImage: {fileID: 4374452412846632294}
   backColor: {fileID: 4898572320361452631}
+  firstTrackerPos: {fileID: 0}
+  secondTrackerPos: {fileID: 0}
 --- !u!82 &-4628674291298244356
 AudioSource:
   m_ObjectHideFlags: 0

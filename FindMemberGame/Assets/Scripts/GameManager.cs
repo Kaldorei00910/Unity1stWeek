@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public GameObject tryTimeTxt;
     public GameObject point;
 
+    public GameObject firstTracker; //이펙트(카드추적)
+    public GameObject secondTracker;
+
     public GameObject switchScript;
 
     public GameObject countDown;
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public Text name_Text;
     public Text Sname_Text;
+
 
     // 40초부터 시간 새기        
         
@@ -103,12 +107,14 @@ public class GameManager : MonoBehaviour
                 point.SetActive(true);
                 //float time을 int time으로 변경(점수에서 소수점 단위 제외)
                 int timeInt = Mathf.FloorToInt(time);
-                point.GetComponent<Text>().text = (finalpoint * timeInt) + "점";
+                point.GetComponent<Text>().text = (finalpoint + timeInt) + "점";
                 this.audioSource.Stop();
                 // 게임 클리어시 시도횟수와 점수 등장
                 switchScript.GetComponent<SwitchColor>().resetList(); //색깔리스트 초기화
             }
             Sname_Text.gameObject.SetActive(true); // 이름 text 활성화
+            firstTracker.SetActive(true);
+            secondTracker.SetActive(true);
         }
         else
         {
@@ -125,7 +131,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine("CountDown"); //카운트다운 함수 중지
         countDown.SetActive(false);
         firstCard = null;
-        secondCard = null;
+        secondCard = null;        
     }
 
     public void close_nameText()
@@ -183,4 +189,5 @@ public class GameManager : MonoBehaviour
         this.audioSource.Stop();
         switchScript.GetComponent<SwitchColor>().resetList(); //색깔리스트 초기화    
     }
+
 }

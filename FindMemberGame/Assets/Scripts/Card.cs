@@ -15,6 +15,7 @@ public class Card : MonoBehaviour
     public SpriteRenderer frontImage;
 
     public SpriteRenderer backColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +47,16 @@ public class Card : MonoBehaviour
             GameManager.instance.firstCard = this;
             //5초 내 두 번째 카드 미선택시 뒤집는 함수
             GameManager.instance.CountFlip();
+            Vector2 firstPos = GameManager.instance.firstCard.transform.position; //첫번째 카드 위치
+            GameManager.instance.firstTracker.transform.position = firstPos; //첫번째 카드 위치로 이펙트 이동
+            GameManager.instance.firstTracker.SetActive(false);
+            GameManager.instance.secondTracker.SetActive(false);
         }
         else
         {
             GameManager.instance.secondCard = this;
+            Vector2 secondPos = GameManager.instance.secondCard.transform.position; //두번째 카드 위치
+            GameManager.instance.secondTracker.transform.position = secondPos; //첫번째 카드 위치로 이펙트 이동
             GameManager.instance.Matched();
         }
     }
