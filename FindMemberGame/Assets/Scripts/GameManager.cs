@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
 
     public AudioSource audioSource; //음원이 될 오디오소스
     public AudioClip failSound;//넣고자 하는 오디오클립, (오디오소스에 클립을 넣고 재생시켜야 함)
-    public AudioClip successSound;   
+    public AudioClip successSound;
+    public AudioClip stageclearSound;
+    public AudioClip timeoverSound;
 
     public Card firstCard;
     public Card secondCard;
@@ -70,7 +72,8 @@ public class GameManager : MonoBehaviour
         {            
             endTxt.SetActive(true);
             Time.timeScale = 0.0f;
-            this.audioSource.Stop();//게임 종료시 노래 정지
+            audioSource.PlayOneShot(timeoverSound); //타임오버 효과음
+            StartCoroutine(StopAfterDelay(1.0f)); //게임 종료시 1.5초후 노래 정지
         }    
         // 0초가 되면 게임 끝
         SecondPick(); 
@@ -94,7 +97,8 @@ public class GameManager : MonoBehaviour
                 tryTimeTxt.GetComponent<Text>().text = "총 " + cardTryCount + "회 시도";
                 point.SetActive(true);
                 point.GetComponent<Text>().text = (finalpoint + time) + "점";
-                this.audioSource.Stop();
+                audioSource.PlayOneShot(stageclearSound); // 클리어효과음
+                StartCoroutine(StopAfterDelay(1.0f)); //클리어시에도 1.5초후 노래정지
                 // 게임 클리어시 시도횟수와 점수 등장
             }
 
@@ -161,6 +165,12 @@ public class GameManager : MonoBehaviour
         {
             secondPick = true;
         }
+    }
+
+    IEnumerator StopAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(1);
+        audioSource.Stop();
     }
 
 }
