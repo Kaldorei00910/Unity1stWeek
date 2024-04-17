@@ -37,7 +37,7 @@ public class Card : MonoBehaviour
         switch (number)
         {
             case 0:
-                nickname = "용감한 수호자";
+                nickname = "수호자 금재은";
                 break;
 
             case 1:
@@ -45,7 +45,7 @@ public class Card : MonoBehaviour
                 break;
 
             case 2:
-                nickname = "선의의 옹호자";
+                nickname = "옹호자 국기웅";
                 break;
 
             case 3:
@@ -53,7 +53,7 @@ public class Card : MonoBehaviour
                 break;
 
             case 4:
-                nickname = "호기심 많은 예술가";
+                nickname = "예술가 이영대";
                 break;
 
             case 5:
@@ -61,7 +61,7 @@ public class Card : MonoBehaviour
                 break;
 
             case 6:
-                nickname = "청렴결백한 논리주의자";
+                nickname = "논리주의자 이유신";
                 break;
 
             case 7:
