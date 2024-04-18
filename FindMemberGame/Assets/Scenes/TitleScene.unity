@@ -259,8 +259,8 @@ MonoBehaviour:
   audioSource: {fileID: 25328791}
   failSound: {fileID: 8300000, guid: cb5f6ec3945b1f54da1d87b2585b9933, type: 3}
   successSound: {fileID: 8300000, guid: 57885376c58b96f48a7a1634c38dfb34, type: 3}
-  warningsound: {fileID: 8300000, guid: d4cab7a9b515f3e4d80eace11c7b6f36, type: 3}
-  backGroundMusic: {fileID: 8300000, guid: 9a33d9bb598bc1a4fa6fd8b1939384c5, type: 3}
+  stageclearSound: {fileID: 8300000, guid: 3c9c52006c48695449e458a988a2402f, type: 3}
+  timeoverSound: {fileID: 8300000, guid: d986ace23eb997547a530aae08a0d5c9, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   timeTxt: {fileID: 0}

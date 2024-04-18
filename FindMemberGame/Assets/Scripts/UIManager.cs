@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     {
         GameUIChange();
         Debug.Log("UI º¯°æ");
-        GameManager.instance.time = 100.0f;
+        GameManager.instance.time = 40.0f;
         GameManager.instance.cardCount = 16;
         GameManager.instance.cardTryCount = 0;
         GameManager.instance.finalpoint = 0;
