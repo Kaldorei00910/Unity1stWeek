@@ -14,6 +14,10 @@ public class Card : MonoBehaviour
     public SpriteRenderer frontImage;
 
     public SpriteRenderer backColor;
+
+    public string nickname; // 팀원들 이름
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +32,48 @@ public class Card : MonoBehaviour
     public void Setting(int number) 
     {
         idx = number;
-        frontImage.sprite = Resources.Load<Sprite>($"rtan{idx}");
+        frontImage.sprite = Resources.Load<Sprite>($"easy{idx}");
+
+        switch (number)
+        {
+            case 0:
+                nickname = "수호자 금재은";
+                break;
+
+            case 1:
+                nickname = "금재은";
+                break;
+
+            case 2:
+                nickname = "옹호자 국기웅";
+                break;
+
+            case 3:
+                nickname = "국기웅";
+                break;
+
+            case 4:
+                nickname = "예술가 이영대";
+                break;
+
+            case 5:
+                nickname = "이영대";
+                break;
+
+            case 6:
+                nickname = "논리주의자 이유신";
+                break;
+
+            case 7:
+                nickname = "이유신";
+                break;
+
+            default: //1~7이 아닐 경우 여기로 들어옴.
+                nickname = "아무나";
+                break;
+        }
+
+
     }   
 
     public void OpenCard()
@@ -61,7 +106,7 @@ public class Card : MonoBehaviour
     void DestroyCardInvoke()
     {
         Destroy(gameObject);
-        GameManager.instance.name_Text.gameObject.SetActive(false);
+        GameManager.instance.Sname_Text.gameObject.SetActive(false);
     }
 
     public void CloseCard()
@@ -82,10 +127,11 @@ public class Card : MonoBehaviour
 
         //텍스트를 바로 가져오는 방법
         GameManager.instance.name_Text.gameObject.SetActive(false);
+        Debug.Log("실패 사라지게 함");
 
     }
 
-    //
+    //카드 뒷면 색상변경 
     public void ChangeColor(){
         backColor.color = new Color( 29/ 255f,  179/ 255f,  172/ 255f);
     }

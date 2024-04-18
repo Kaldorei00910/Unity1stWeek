@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
+using static UnityEngine.ParticleSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public Card secondCard;
 
     public Text timeTxt;
+    public Text name_Text;
+    public Text Sname_Text;
 
     public GameObject endTxt;
     public GameObject tryTimeTxt;
@@ -39,10 +42,10 @@ public class GameManager : MonoBehaviour
 
     public float time = 40.0f;
 
-    public Text name_Text;
-    public Text Sname_Text;
+
 
     // 40ÃÊºÎÅÍ ½Ã°£ »õ±â
+
 
     private void Awake()
     {
@@ -92,8 +95,6 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
-            Sname_Text.text = "±¹±â¿õ,ÀÌ¿µ´ë,ÀÌÀ¯½Å,±İÀçÀº";
-
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             audioSource.PlayOneShot(successSound);//¿Àµğ¿À¼Ò½º Àç»ı
@@ -101,21 +102,26 @@ public class GameManager : MonoBehaviour
             cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
             finalpoint += 10; // ¸ÅÄª ¼º°ø Á¡¼ö
 
+            Debug.Log("ÀÌ¸§ È®ÀÎ" + firstCard.nickname);
+            Sname_Text.text = firstCard.nickname; //¸ÅÄª ¼º°ø ½Ã Ãâ·ÂµÇ´Â ÀÌ¸§
+            Sname_Text.gameObject.SetActive(true); // ¼º°ø½Ã ÀÌ¸§ text È°¼ºÈ­ 
+
             if (cardCount == 0)
             {
-                 endTxt.SetActive(true);
-                 Time.timeScale = 0.0f;
+                endTxt.SetActive(true);
+                Time.timeScale = 0.0f;
                 tryTimeTxt.SetActive(true);
                 tryTimeTxt.GetComponent<Text>().text = "ÃÑ " + cardTryCount + "È¸ ½Ãµµ";
                 point.SetActive(true);
 
-                point.GetComponent<Text>().text = (finalpoint + time) + "??";
+                point.GetComponent<Text>().text = (finalpoint + time) + "Á¡";
                 audioSource.PlayOneShot(stageclearSound); // ?´ë¦¬?´íš¨ê³¼ìŒ
                 StartCoroutine(StopAfterDelay(1.0f)); //?´ë¦¬?´ì‹œ?ë„ 1.5ì´ˆí›„ ?¸ë˜?•ì?
-                                                          // ê²Œì„ ?´ë¦¬?´ì‹œ ?œë„?Ÿìˆ˜?€ ?ìˆ˜ ?±ì¥
+                                                      // ê²Œì„ ?´ë¦¬?´ì‹œ ?œë„?Ÿìˆ˜?€ ?ìˆ˜ ?±ì¥
+                Sname_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
             }
 
-            Sname_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
+            
             }
             else
             {
@@ -135,7 +141,6 @@ public class GameManager : MonoBehaviour
             countDown.SetActive(false);
             firstCard = null;
             secondCard = null;
-            name_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
         }
     
 
@@ -184,10 +189,6 @@ public class GameManager : MonoBehaviour
             secondPick = true;
         }
     }
-    public void close_Sname_Text()
-    {
-        Sname_Text.gameObject.SetActive(false);
-    }
 
     public void StartGame()//°ÔÀÓ ÇÃ·¹ÀÌ È­¸éÀ¸·Î ³Ñ°ÜÁÖ´Â ÄÚ·çÆ¾
     {
@@ -223,6 +224,15 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1);
         audioSource.Stop();
+    }
+
+    public void close_name_Text()
+    {
+        name_Text.gameObject.SetActive(false);
+    }
+    public void close_Sname_Text()
+    {
+        Sname_Text.gameObject.SetActive(false);
     }
 
 }
