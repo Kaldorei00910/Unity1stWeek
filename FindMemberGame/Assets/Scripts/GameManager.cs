@@ -112,10 +112,10 @@ public class GameManager : MonoBehaviour
                 point.GetComponent<Text>().text = (finalpoint + time) + "??";
                 audioSource.PlayOneShot(stageclearSound); // ?´ë¦¬?´íš¨ê³¼ìŒ
                 StartCoroutine(StopAfterDelay(1.0f)); //?´ë¦¬?´ì‹œ?ë„ 1.5ì´ˆí›„ ?¸ë˜?•ì?
-                                                          // ê²Œì„ ?´ë¦¬?´ì‹œ ?œë„?Ÿìˆ˜?€ ?ìˆ˜ ?±ì¥
+                                                      // ê²Œì„ ?´ë¦¬?´ì‹œ ?œë„?Ÿìˆ˜?€ ?ìˆ˜ ?±ì¥
+                Sname_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
             }
-
-            Sname_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
+                        
             }
             else
             {
