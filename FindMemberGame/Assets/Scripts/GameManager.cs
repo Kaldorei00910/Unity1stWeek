@@ -11,16 +11,17 @@ using static UnityEngine.ParticleSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
-    public AudioSource audioSource; //?Œì›?????¤ë””?¤ì†Œ??
+    public AudioSource audioSource;
     public AudioSource timeoveraudioSource;
-    public AudioClip failSound;//?£ê³ ???˜ëŠ” ?¤ë””?¤í´ë¦? (?¤ë””?¤ì†Œ?¤ì— ?´ë¦½???£ê³  ?¬ìƒ?œì¼œ????
+    public AudioClip failSound;
     public AudioClip successSound;
     public AudioClip stageclearSound;
     public AudioClip timeoverSound;
 
     public Card firstCard;
     public Card secondCard;
+    public Card beforeFirst; //check unclosed card
+    public Card beforeSecond;
 
     public Text timeTxt;
     public Text name_Text;
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject tryTimeTxt;
     public GameObject point;
 
-    public GameObject firstTracker; //?´í™??ì¹´ë“œì¶”ì )
+    public GameObject firstTracker;
     public GameObject secondTracker;
 
     public GameObject switchScript;
@@ -39,20 +40,22 @@ public class GameManager : MonoBehaviour
     public Text countDownTxt;
 
     bool secondPick = false;
-    
+
     private float startTime;
 
     public bool isGameStart = false;
-    public int cardCount = 16;//Ä«µå ÀüÃ¼ °¹¼ö
+    public int cardCount = 16;//ì¹´ë“œ ì „ì²´ ê°¯ìˆ˜
     public int cardTryCount = 0;
     public int finalpoint = 0;
 
     public float time = 40.0f;
 
-    // 40ÃÊºÎÅÍ ½Ã°£ »õ±â
 
-      
-        
+
+    // 40ì´ˆë¶€í„° ì‹œê°„ ìƒˆê¸°
+
+
+
     private void Awake()
     {
         if (instance == null)
@@ -68,7 +71,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         audioSource = this.gameObject.GetComponent<AudioSource>();
         cardCount = 16;
-        switchScript.GetComponent<SwitchColor>().resetList(); //?‰ê¹”ë¦¬ìŠ¤??ì´ˆê¸°??        
+        switchScript.GetComponent<SwitchColor>().resetList(); 
     }
 
     void Update()
@@ -78,13 +81,13 @@ public class GameManager : MonoBehaviour
             time -= Time.deltaTime;
             timeTxt.text = time.ToString("N2");
             timeoveraudioSource.volume = 0.05f;
-            // Å¸ÀÓ¿À¹ö »ç¿îµå Á¶Àı
+            // íƒ€ì„ì˜¤ë²„ ì‚¬ìš´ë“œ ì¡°ì ˆ
 
             if (time > 15.0f)
             {
                 audioSource.pitch = 1f;
             }
-            //Å¬¸®¾îÇÏ°í ´Ù½Ã ½ÃÀÛÇßÀ»¶§ ¼Ò¸® »¡¸® Àç»ı¾ÈµÇ°Ô ÇÏ±â
+            //í´ë¦¬ì–´í•˜ê³  ë‹¤ì‹œ ì‹œì‘í–ˆì„ë•Œ ì†Œë¦¬ ë¹¨ë¦¬ ì¬ìƒì•ˆë˜ê²Œ í•˜ê¸°
             if (time < 15.0f)
             {
                 timeTxt.color = Color.red;
@@ -99,12 +102,11 @@ public class GameManager : MonoBehaviour
                 switchScript.GetComponent<SwitchColor>().resetList();
                 StopCoroutine("CountDown");
                 countDown.SetActive(false);
-                timeoveraudioSource.PlayOneShot(timeoverSound); //Å¸ÀÓ¿À¹ö È¿°úÀ½
-                StartCoroutine(StopAfterDelay(1.0f)); //°ÔÀÓ Á¾·á½Ã 1.5ÃÊÈÄ ³ë·¡ Á¤Áö
+                timeoveraudioSource.PlayOneShot(timeoverSound); //íƒ€ì„ì˜¤ë²„ íš¨ê³¼ìŒ
+                StartCoroutine(StopAfterDelay(1.0f)); //ê²Œì„ ì¢…ë£Œì‹œ 1.5ì´ˆí›„ ë…¸ë˜ ì •ì§€
             }
-            // 0ÃÊ°¡ µÇ¸é °ÔÀÓ ³¡
+            // 0ì´ˆê°€ ë˜ë©´ ê²Œì„ ë
             SecondPick();
-
         }
     }
 
@@ -112,55 +114,56 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
-            Sname_Text.text = "±¹±â¿õ,ÀÌ¿µ´ë,ÀÌÀ¯½Å,±İÀçÀº";
+            Sname_Text.text = "êµ­ê¸°ì›…,ì´ì˜ëŒ€,ì´ìœ ì‹ ,ê¸ˆì¬ì€";
 
             firstCard.DestroyCard();
             secondCard.DestroyCard();
-            audioSource.PlayOneShot(successSound);//¿Àµğ¿À¼Ò½º Àç»ı
+            audioSource.PlayOneShot(successSound);//ì˜¤ë””ì˜¤ì†ŒìŠ¤ ì¬ìƒ
             cardCount -= 2;
-            cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
-            finalpoint += 10; // ¸ÅÄª ¼º°ø Á¡¼ö
+            cardTryCount += 1; //ì‹œë„íšŸìˆ˜ ì¹´ìš´íŠ¸
+            finalpoint += 10; // ë§¤ì¹­ ì„±ê³µ ì ìˆ˜
 
-            Debug.Log("ÀÌ¸§ È®ÀÎ" + firstCard.nickname);
-            Sname_Text.text = firstCard.nickname; //¸ÅÄª ¼º°ø ½Ã Ãâ·ÂµÇ´Â ÀÌ¸§
-            Sname_Text.gameObject.SetActive(true); // ¼º°ø½Ã ÀÌ¸§ text È°¼ºÈ­ 
+            Sname_Text.text = firstCard.nickname; //ë§¤ì¹­ ì„±ê³µ ì‹œ ì¶œë ¥ë˜ëŠ” ì´ë¦„
+            Sname_Text.gameObject.SetActive(true); // ì„±ê³µì‹œ ì´ë¦„ text í™œì„±í™” 
 
             if (cardCount == 0)
             {
                 endTxt.SetActive(true);
                 tryTimeTxt.SetActive(true);
-                tryTimeTxt.GetComponent<Text>().text = "ÃÑ " + cardTryCount + "È¸ ½Ãµµ";
+                tryTimeTxt.GetComponent<Text>().text = "ì´ " + cardTryCount + "íšŒ ì‹œë„";
                 point.SetActive(true);
-                //float timeÀ» int timeÀ¸·Î º¯°æ(Á¡¼ö¿¡¼­ ¼Ò¼öÁ¡ ´ÜÀ§ Á¦¿Ü)
+                //float timeì„ int timeìœ¼ë¡œ ë³€ê²½(ì ìˆ˜ì—ì„œ ì†Œìˆ˜ì  ë‹¨ìœ„ ì œì™¸)
                 int timeInt = Mathf.FloorToInt(time);
-                point.GetComponent<Text>().text = (finalpoint + timeInt) + "Á¡";
-                audioSource.PlayOneShot(stageclearSound); // ?´ë¦¬?´íš¨ê³¼ìŒ
-                StartCoroutine(StopAfterDelay(1.0f)); //?´ë¦¬?´ì‹œ?ë„ 1.5ì´ˆí›„ ?¸ë˜?•ì?
-                                                      // ê²Œì„ ?´ë¦¬?´ì‹œ ?œë„?Ÿìˆ˜?€ ?ìˆ˜ ?±ì¥
+                point.GetComponent<Text>().text = (finalpoint + timeInt) + "ì ";
+                audioSource.PlayOneShot(stageclearSound); 
+                StartCoroutine(StopAfterDelay(1.0f)); 
+                                                      
                 switchScript.GetComponent<SwitchColor>().resetList();
-                Sname_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­                
+                Sname_Text.gameObject.SetActive(true); // ì´ë¦„ text í™œì„±í™”                
             }
             firstTracker.SetActive(true);
             secondTracker.SetActive(true);
         }
         else
         {
-            name_Text.text = "½ÇÆĞ!!";
+            name_Text.text = "ì‹¤íŒ¨!!";
             firstCard.CloseCard();
             secondCard.CloseCard();
-            audioSource.PlayOneShot(failSound);//¿Àµğ¿À¼Ò½º Àç»ı
-            cardTryCount += 1; //½ÃµµÈ½¼ö Ä«¿îÆ®
-            finalpoint -= 2; //¸ÅÄª ½ÇÆĞ Á¡¼ö
-            time -= 2.0f;//½ÇÆĞÇßÀ» ½Ã ³²´Â½Ã°£ÀÌ ´õ ÁÙ¾îµé°Ô 
-            name_Text.gameObject.SetActive(true); // ÀÌ¸§ text È°¼ºÈ­
+            audioSource.PlayOneShot(failSound);//ì˜¤ë””ì˜¤ì†ŒìŠ¤ ì¬ìƒ
+            cardTryCount += 1; //ì‹œë„íšŸìˆ˜ ì¹´ìš´íŠ¸
+            finalpoint -= 2; //ë§¤ì¹­ ì‹¤íŒ¨ ì ìˆ˜
+            time -= 2.0f;//ì‹¤íŒ¨í–ˆì„ ì‹œ ë‚¨ëŠ”ì‹œê°„ì´ ë” ì¤„ì–´ë“¤ê²Œ 
+            name_Text.gameObject.SetActive(true); // ì´ë¦„ text í™œì„±í™”
             switchScript.GetComponent<SwitchColor>().switchColor();
         }
-        StopCoroutine("CountDown"); //
+        StopCoroutine("CountDown"); 
         countDown.SetActive(false);
+        beforeFirst = firstCard;
+        beforeSecond = secondCard;
         firstCard = null;
         secondCard = null;
     }
-    
+
     public void close_nameText()
     {
         name_Text.gameObject.SetActive(false);
@@ -185,7 +188,7 @@ public class GameManager : MonoBehaviour
         firstCard = null;
     }
 
-    public void CountFlip() //µÎ¹øÂ° Ä«µå ¹Ì¼±ÅÃ½Ã Ä«¿îÆ®´Ù¿î ½ÃÀÛ ÇÔ¼ö
+    public void CountFlip() //ë‘ë²ˆì§¸ ì¹´ë“œ ë¯¸ì„ íƒì‹œ ì¹´ìš´íŠ¸ë‹¤ìš´ ì‹œì‘ í•¨ìˆ˜
     {
         if (secondPick == false)
         {
@@ -193,7 +196,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SecondPick() //µÎ¹øÂ° Ä«µåÀ¯¹« È®ÀÎ
+    public void SecondPick() //ë‘ë²ˆì§¸ ì¹´ë“œìœ ë¬´ í™•ì¸
     {
         if (secondCard == null)
         {
@@ -205,7 +208,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame()//°ÔÀÓ ÇÃ·¹ÀÌ È­¸éÀ¸·Î ³Ñ°ÜÁÖ´Â ÄÚ·çÆ¾
+    public void StartGame()//ê²Œì„ í”Œë ˆì´ í™”ë©´ìœ¼ë¡œ ë„˜ê²¨ì£¼ëŠ” ì½”ë£¨í‹´
     {
         StartCoroutine(GameCoroutine());
     }
@@ -256,10 +259,10 @@ public class GameManager : MonoBehaviour
     public void BlackOver()
     {
         endTxt.SetActive(true); 
-        Time.timeScale = 0.0f;        
-        switchScript.GetComponent<SwitchColor>().resetList(); //»ö±ò¸®½ºÆ® ÃÊ±âÈ­    
-        timeoveraudioSource.PlayOneShot(timeoverSound); // ±î¸¸»ö µÎ°³ °ñ¶úÀ»¶§µµ ½ÇÆĞÈ¿°úÀ½ Àç»ı
-        StartCoroutine(StopAfterDelay(1.0f)); // ÀÌ¶§µµ Àá½Ã ´ë±âÈÄ Á¾·á
+        Time.timeScale = 0.0f;
+        this.audioSource.Stop();
+        switchScript.GetComponent<SwitchColor>().resetList(); //ìƒ‰ê¹”ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
+        timeoveraudioSource.PlayOneShot(timeoverSound); // ê¹Œë§Œìƒ‰ ë‘ê°œ ê³¨ëì„ë•Œë„ ì‹¤íŒ¨íš¨ê³¼ìŒ ì¬ìƒ
+        StartCoroutine(StopAfterDelay(1.0f)); // ì´ë•Œë„ ì ì‹œ ëŒ€ê¸°í›„ ì¢…ë£Œ
     }
-
 }

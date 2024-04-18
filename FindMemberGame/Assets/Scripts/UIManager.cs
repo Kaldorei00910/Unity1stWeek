@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -21,16 +21,16 @@ public class UIManager : MonoBehaviour
     void OnEnable()
     {
         GameUIChange();
-        Debug.Log("UI º¯°æ");
+        Debug.Log("UI ë³€ê²½");
         GameManager.instance.time = 60.0f;
         GameManager.instance.cardCount = 16;
         GameManager.instance.cardTryCount = 0;
         GameManager.instance.finalpoint = 0;
         GameManager.instance.audioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
         GameManager.instance.audioSource.GetComponent<AudioSource>().Play();
-        Debug.Log("ÃÊ±âÈ­ ¿Ï·á");
+        Debug.Log("ì´ˆê¸°í™” ì™„ë£Œ");
         GameManager.instance.isGameStart = true;
-        Debug.Log("ºÒ°ª º¯°ætrue(uimanager)");
+        Debug.Log("ë¶ˆê°’ ë³€ê²½true(uimanager)");
         Time.timeScale = 1.0f;
     }
 
