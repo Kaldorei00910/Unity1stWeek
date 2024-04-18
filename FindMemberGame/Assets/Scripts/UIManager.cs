@@ -31,6 +31,13 @@ public class UIManager : MonoBehaviour
         GameManager.instance.bestScore.GetComponent<Text>().text = "BestScore : " + GameManager.instance.highScore;
         Debug.Log("초기화 완료");
         GameManager.instance.isGameStart = true;
+
+        if (!GameManager.instance.audioSource.isPlaying)
+        {
+            GameManager.instance.audioSource.Play();
+        }
+        
+
         Debug.Log("불값 변경true(uimanager)");
         Time.timeScale = 1.0f;
     }

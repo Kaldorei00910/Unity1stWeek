@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
-        audioSource = this.gameObject.GetComponent<AudioSource>();
+        //audioSource = this.gameObject.GetComponent<AudioSource>();
+        audioSource.Play();
         cardCount = 16;
         switchScript.GetComponent<SwitchColor>().resetList(); 
     }
@@ -238,7 +239,7 @@ public class GameManager : MonoBehaviour
     IEnumerator MainScreenCoroutine()
     {
         AsyncOperation loadScene = SceneManager.LoadSceneAsync("TitleScene");
-
+        
         while (loadScene != null)
         {
             yield return null;
