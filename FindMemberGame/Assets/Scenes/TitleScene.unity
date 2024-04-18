@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StagePanel: {fileID: 404851615}
+  StageTxt: {fileID: 0}
 --- !u!114 &1757361696
 MonoBehaviour:
   m_ObjectHideFlags: 0
