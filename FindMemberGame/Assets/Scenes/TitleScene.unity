@@ -264,9 +264,14 @@ MonoBehaviour:
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   timeTxt: {fileID: 0}
+  name_Text: {fileID: 0}
+  Sname_Text: {fileID: 0}
   endTxt: {fileID: 0}
   tryTimeTxt: {fileID: 0}
   point: {fileID: 0}
+  firstTracker: {fileID: 0}
+  secondTracker: {fileID: 0}
+  switchScript: {fileID: 7363776793884891625, guid: 7848f95d257a9be49b4f30b00e3f582b, type: 3}
   countDown: {fileID: 0}
   countDownTxt: {fileID: 0}
   isGameStart: 0
@@ -274,8 +279,6 @@ MonoBehaviour:
   cardTryCount: 0
   finalpoint: 0
   time: 100
-  name_Text: {fileID: 0}
-  Sname_Text: {fileID: 0}
 --- !u!4 &25328790
 Transform:
   m_ObjectHideFlags: 0

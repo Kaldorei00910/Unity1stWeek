@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     {
         GameUIChange();
         Debug.Log("UI º¯°æ");
-        GameManager.instance.time = 40.0f;
+        GameManager.instance.time = 100.0f;
         GameManager.instance.cardCount = 16;
         GameManager.instance.cardTryCount = 0;
         GameManager.instance.finalpoint = 0;
@@ -46,6 +46,9 @@ public class UIManager : MonoBehaviour
         GameManager.instance.name_Text = GameObject.Find("Canvas").transform.Find("nameTxt").GetComponent<Text>();
         GameManager.instance.Sname_Text = GameObject.Find("Canvas").transform.Find("Sname_Text").GetComponent<Text>();
         GameManager.instance.tryTimeTxt = GameObject.Find("Canvas").transform.Find("TryTimeTxt").gameObject;
+
+        GameManager.instance.firstTracker = GameObject.Find("Tracker").transform.Find("FirstTracker").gameObject;
+        GameManager.instance.secondTracker = GameObject.Find("Tracker").transform.Find("SecondTracker").gameObject;
 
     }
 

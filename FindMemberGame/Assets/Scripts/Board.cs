@@ -15,6 +15,7 @@ public class Board : MonoBehaviour
         arr = arr.OrderBy(x => Random.Range(0f, 7f)).ToArray();
 
         StartCoroutine(WaitForIt(arr));//코루틴을 사용한 카드의 순차적 배열
+
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class Board : MonoBehaviour
     {
 
     }
-    IEnumerator WaitForIt(int[] arr)//카드 배열함수(코루틴)
+    IEnumerator WaitForIt(int[] arr)//移대뱶 諛곗뿴?⑥닔(肄붾（??
     {
         for (int i = 0; i < 16; i++)
         {

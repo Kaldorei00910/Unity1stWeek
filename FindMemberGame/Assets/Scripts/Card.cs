@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 public class Card : MonoBehaviour
 {
     public int idx = 0;
-    public AudioSource audioSource; //À½¿øÀÌ µÉ ¿Àµğ¿À¼Ò½º
-    public AudioClip click;//³Ö°íÀÚ ÇÏ´Â ¿Àµğ¿ÀÅ¬¸³, (¿Àµğ¿À¼Ò½º¿¡ Å¬¸³À» ³Ö°í Àç»ı½ÃÄÑ¾ß ÇÔ)
+    public AudioSource audioSource; //?Œì›?????¤ë””?¤ì†Œ??
+    public AudioClip click;//?£ê³ ???˜ëŠ” ?¤ë””?¤í´ë¦? (?¤ë””?¤ì†Œ?¤ì— ?´ë¦½???£ê³  ?¬ìƒ?œì¼œ????
     public GameObject front;
     public GameObject back;
 
@@ -16,8 +17,6 @@ public class Card : MonoBehaviour
     public SpriteRenderer backColor;
 
     public string nickname; // ÆÀ¿øµé ÀÌ¸§
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -82,18 +81,24 @@ public class Card : MonoBehaviour
         front.SetActive(true);
         back.SetActive(false);
 
-        audioSource.PlayOneShot(click);//¿Àµğ¿À¼Ò½º Àç»ı
+        audioSource.PlayOneShot(click);//?¤ë””?¤ì†Œ???¬ìƒ
 
 
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
-            //5ÃÊ ³» µÎ ¹øÂ° Ä«µå ¹Ì¼±ÅÃ½Ã µÚÁı´Â ÇÔ¼ö
+            //5ì´?????ë²ˆì§¸ ì¹´ë“œ ë¯¸ì„ ?ì‹œ ?¤ì§‘???¨ìˆ˜
             GameManager.instance.CountFlip();
+            Vector2 firstPos = GameManager.instance.firstCard.transform.position; //ì²«ë²ˆì§?ì¹´ë“œ ?„ì¹˜
+            GameManager.instance.firstTracker.transform.position = firstPos; //ì²«ë²ˆì§?ì¹´ë“œ ?„ì¹˜ë¡??´í™???´ë™
+            GameManager.instance.firstTracker.SetActive(false);
+            GameManager.instance.secondTracker.SetActive(false);
         }
         else
         {
             GameManager.instance.secondCard = this;
+            Vector2 secondPos = GameManager.instance.secondCard.transform.position; //?ë²ˆì§?ì¹´ë“œ ?„ì¹˜
+            GameManager.instance.secondTracker.transform.position = secondPos; //ì²«ë²ˆì§?ì¹´ë“œ ?„ì¹˜ë¡??´í™???´ë™
             GameManager.instance.Matched();
         }
     }
@@ -119,20 +124,36 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
-        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//Ä«µå¸¦ ´Ù½Ã ¿ø»óÅÂ·Î µ¹¸®°í, È¸Àü°¢À» ±âº»À¸·Î º¯°æ
+        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//ì¹´ë“œë¥??¤ì‹œ ?ìƒ?œë¡œ ?Œë¦¬ê³? ?Œì „ê°ì„ ê¸°ë³¸?¼ë¡œ ë³€ê²?
 
 
-        //ÇÔ¼ö·Î ¹Ù·Î ºÒ·¯¿À±â
+        //?¨ìˆ˜ë¡?ë°”ë¡œ ë¶ˆëŸ¬?¤ê¸°
         //GameManager.instance.close_nameText();
 
-        //ÅØ½ºÆ®¸¦ ¹Ù·Î °¡Á®¿À´Â ¹æ¹ı
+        //?ìŠ¤?¸ë? ë°”ë¡œ ê°€?¸ì˜¤??ë°©ë²•
         GameManager.instance.name_Text.gameObject.SetActive(false);
         Debug.Log("½ÇÆĞ »ç¶óÁö°Ô ÇÔ");
 
     }
 
     //Ä«µå µŞ¸é »ö»óº¯°æ 
-    public void ChangeColor(){
-        backColor.color = new Color( 29/ 255f,  179/ 255f,  172/ 255f);
+    //
+
+    public void ChangeColor(string Backcolor)
+    {
+        if (Backcolor == "green")
+        {
+            backColor.color = new Color( 29f/ 255f, 179f/ 255f, 172f/ 255f);
+        }
+        else if (Backcolor == "red")
+        {
+            backColor.color = new Color( 227f/ 255f, 51f/ 255f, 51f/ 255f);
+        }
+        else if (Backcolor == "black")
+        {
+            backColor.color = new Color( 1f/ 255f, 1f/ 255f, 1f/ 255f);
+        }
+        
+
     }
 }
