@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
         GameManager.instance.cardTryCount = 0;
         GameManager.instance.finalpoint = 0;
         GameManager.instance.audioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
-        GameManager.instance.audioSource.GetComponent<AudioSource>().Play();
         GameManager.instance.bestScore.GetComponent<Text>().text = "BestScore : " + GameManager.instance.highScore;
         Debug.Log("초기화 완료");
         GameManager.instance.isGameStart = true;
