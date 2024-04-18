@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public AudioSource audioSource; //?뚯썝?????ㅻ뵒?ㅼ냼??
+    public AudioSource timeoveraudioSource;
     public AudioClip failSound;//?ｊ퀬???섎뒗 ?ㅻ뵒?ㅽ겢由? (?ㅻ뵒?ㅼ냼?ㅼ뿉 ?대┰???ｊ퀬 ?ъ깮?쒖폒????
     public AudioClip successSound;
     public AudioClip stageclearSound;
@@ -81,18 +82,18 @@ public class GameManager : MonoBehaviour
             {
                 timeTxt.color = Color.red;
                 timeTxt.fontSize = 70;
-                audioSource.pitch = 1.4f;
+                this.audioSource.pitch = 1.4f;
                 timeTxt.color = Color.red;
             }
 
             if (time <= 0.0f)
             {
-                endTxt.SetActive(true);
                 Time.timeScale = 0.0f;
+                endTxt.SetActive(true);                
                 switchScript.GetComponent<SwitchColor>().resetList();
                 StopCoroutine("CountDown");
                 countDown.SetActive(false);
-                audioSource.PlayOneShot(timeoverSound); //타임오버 효과음
+                timeoveraudioSource.PlayOneShot(timeoverSound); //타임오버 효과음
                 StartCoroutine(StopAfterDelay(1.0f)); //게임 종료시 1.5초후 노래 정지
             }
             // 0초가 되면 게임 끝
@@ -234,6 +235,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(2);
         Time.timeScale = 0.0f;
         audioSource.Stop();
+        audioSource.pitch = 1f;
     }
 
     public void close_name_Text()
@@ -248,9 +250,10 @@ public class GameManager : MonoBehaviour
     public void BlackOver()
     {
         endTxt.SetActive(true); 
-        Time.timeScale = 0.0f;
-        this.audioSource.Stop();
+        Time.timeScale = 0.0f;        
         switchScript.GetComponent<SwitchColor>().resetList(); //색깔리스트 초기화    
+        timeoveraudioSource.PlayOneShot(timeoverSound); // 까만색 두개 골랐을때도 실패효과음 재생
+        StartCoroutine(StopAfterDelay(1.0f)); // 이때도 잠시 대기후 종료
     }
 
 }
