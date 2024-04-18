@@ -248,7 +248,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StopAfterDelay(float delay)
     {
 
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 0.0f;
         audioSource.Stop();
         audioSource.pitch = 1f;
