@@ -16,7 +16,7 @@ public class Card : MonoBehaviour
     public SpriteRenderer frontImage;
 
     public SpriteRenderer backColor;
-
+    public GameObject ImageScript;
     public string nickname; // 팀원들 이름
     // Start is called before the first frame update
     void Start()
@@ -153,15 +153,15 @@ public class Card : MonoBehaviour
     {
         if (Backcolor == "green")
         {
-            backColor.color = new Color( 29f/ 255f, 179f/ 255f, 172f/ 255f);
+            ImageScript.GetComponent<ImageChange>().ChangeGreen();
         }
         else if (Backcolor == "red")
         {
-            backColor.color = new Color( 227f/ 255f, 51f/ 255f, 51f/ 255f);
+            ImageScript.GetComponent<ImageChange>().ChangeRed();
         }
         else if (Backcolor == "black")
         {
-            backColor.color = new Color( 1f/ 255f, 1f/ 255f, 1f/ 255f);
+            ImageScript.GetComponent<ImageChange>().ChangeBlack();
         }
         
 
