@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,8 +6,8 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     public int idx = 0;
-    public AudioSource audioSource; //?Œì›?????¤ë””?¤ì†Œ??
-    public AudioClip click;//?£ê³ ???˜ëŠ” ?¤ë””?¤í´ë¦? (?¤ë””?¤ì†Œ?¤ì— ?´ë¦½???£ê³  ?¬ìƒ?œì¼œ????
+    public AudioSource audioSource;
+    public AudioClip click;
     public GameObject front;
     public GameObject back;
 
@@ -16,7 +17,7 @@ public class Card : MonoBehaviour
 
     public SpriteRenderer backColor;
 
-    public string nickname; // ÆÀ¿øµé ÀÌ¸§
+    public string nickname; // íŒ€ì›ë“¤ ì´ë¦„
     // Start is called before the first frame update
     void Start()
     {
@@ -36,39 +37,39 @@ public class Card : MonoBehaviour
         switch (number)
         {
             case 0:
-                nickname = "¼öÈ£ÀÚ ±İÀçÀº";
+                nickname = "ìˆ˜í˜¸ì ê¸ˆì¬ì€";
                 break;
 
             case 1:
-                nickname = "±İÀçÀº";
+                nickname = "ê¸ˆì¬ì€";
                 break;
 
             case 2:
-                nickname = "¿ËÈ£ÀÚ ±¹±â¿õ";
+                nickname = "ì˜¹í˜¸ì êµ­ê¸°ì›…";
                 break;
 
             case 3:
-                nickname = "±¹±â¿õ";
+                nickname = "êµ­ê¸°ì›…";
                 break;
 
             case 4:
-                nickname = "¿¹¼ú°¡ ÀÌ¿µ´ë";
+                nickname = "ì˜ˆìˆ ê°€ ì´ì˜ëŒ€";
                 break;
 
             case 5:
-                nickname = "ÀÌ¿µ´ë";
+                nickname = "ì´ì˜ëŒ€";
                 break;
 
             case 6:
-                nickname = "³í¸®ÁÖÀÇÀÚ ÀÌÀ¯½Å";
+                nickname = "ë…¼ë¦¬ì£¼ì˜ì ì´ìœ ì‹ ";
                 break;
 
             case 7:
-                nickname = "ÀÌÀ¯½Å";
+                nickname = "ì´ìœ ì‹ ";
                 break;
 
-            default: //1~7ÀÌ ¾Æ´Ò °æ¿ì ¿©±â·Î µé¾î¿È.
-                nickname = "¾Æ¹«³ª";
+            default: //1~7ì´ ì•„ë‹ ê²½ìš° ì—¬ê¸°ë¡œ ë“¤ì–´ì˜´.
+                nickname = "ì•„ë¬´ë‚˜";
                 break;
         }
 
@@ -81,24 +82,31 @@ public class Card : MonoBehaviour
         front.SetActive(true);
         back.SetActive(false);
 
-        audioSource.PlayOneShot(click);//?¤ë””?¤ì†Œ???¬ìƒ
+        audioSource.PlayOneShot(click);
 
 
         if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
-            //5ì´?????ë²ˆì§¸ ì¹´ë“œ ë¯¸ì„ ?ì‹œ ?¤ì§‘???¨ìˆ˜
+
             GameManager.instance.CountFlip();
-            Vector2 firstPos = GameManager.instance.firstCard.transform.position; //ì²«ë²ˆì§?ì¹´ë“œ ?„ì¹˜
-            GameManager.instance.firstTracker.transform.position = firstPos; //ì²«ë²ˆì§?ì¹´ë“œ ?„ì¹˜ë¡??´í™???´ë™
+            Vector2 firstPos = GameManager.instance.firstCard.transform.position; 
+            GameManager.instance.firstTracker.transform.position = firstPos; 
             GameManager.instance.firstTracker.SetActive(false);
             GameManager.instance.secondTracker.SetActive(false);
+            //check unclosed cards
+            if (GameManager.instance.beforeFirst != null && GameManager.instance.beforeSecond != null) 
+            {
+                GameManager.instance.beforeFirst.CloseCardNow(); 
+                GameManager.instance.beforeSecond.CloseCardNow();
+            }
         }
         else
         {
             GameManager.instance.secondCard = this;
-            Vector2 secondPos = GameManager.instance.secondCard.transform.position; //?ë²ˆì§?ì¹´ë“œ ?„ì¹˜
-            GameManager.instance.secondTracker.transform.position = secondPos; //ì²«ë²ˆì§?ì¹´ë“œ ?„ì¹˜ë¡??´í™???´ë™
+
+            Vector2 secondPos = GameManager.instance.secondCard.transform.position; 
+            GameManager.instance.secondTracker.transform.position = secondPos;
             GameManager.instance.Matched();
         }
     }
@@ -124,19 +132,21 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
-        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);//ì¹´ë“œë¥??¤ì‹œ ?ìƒ?œë¡œ ?Œë¦¬ê³? ?Œì „ê°ì„ ê¸°ë³¸?¼ë¡œ ë³€ê²?
+        this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-
-        //?¨ìˆ˜ë¡?ë°”ë¡œ ë¶ˆëŸ¬?¤ê¸°
         //GameManager.instance.close_nameText();
 
-        //?ìŠ¤?¸ë? ë°”ë¡œ ê°€?¸ì˜¤??ë°©ë²•
+
         GameManager.instance.name_Text.gameObject.SetActive(false);
-        Debug.Log("½ÇÆĞ »ç¶óÁö°Ô ÇÔ");
 
     }
 
-    //Ä«µå µŞ¸é »ö»óº¯°æ 
+    public void CloseCardNow() //check unclosed card
+    {
+        Invoke("CloseCardInvoke",0f);
+    }
+
+    //ì¹´ë“œ ë’·ë©´ ìƒ‰ìƒë³€ê²½ 
     //
 
     public void ChangeColor(string Backcolor)

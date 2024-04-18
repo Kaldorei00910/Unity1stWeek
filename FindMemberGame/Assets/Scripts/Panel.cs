@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -18,7 +18,7 @@ public class Panel : MonoBehaviour
     {
         
     }
-    IEnumerator MakeBtn(int[] arr)//ī�� �迭�Լ�(�ڷ�ƾ)
+    IEnumerator MakeBtn(int[] arr)//카드 배열함수(코루틴)
     {
         for (int i = 0; i < 4; i++)
         {

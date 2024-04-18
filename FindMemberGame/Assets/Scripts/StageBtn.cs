@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +9,7 @@ public class StageBtn : MonoBehaviour
 
     public void GoToGame()
     {
-        GameManager.instance.StartGame();//¸ŞÀÎ ½Å ÀüÈ¯ ¹× °¢Á¾ »çÀü¼¼ÆÃ
+        GameManager.instance.StartGame();//ë©”ì¸ ì‹  ì „í™˜ ë° ê°ì¢… ì‚¬ì „ì„¸íŒ…
     }
 
     public void OpenPanal()
