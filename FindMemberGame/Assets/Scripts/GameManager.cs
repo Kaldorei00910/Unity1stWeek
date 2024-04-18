@@ -78,6 +78,11 @@ public class GameManager : MonoBehaviour
             time -= Time.deltaTime;
             timeTxt.text = time.ToString("N2");
 
+            if(time > 15.0f)
+            {
+                audioSource.pitch = 1f;
+            }
+            //≈¨∏ÆæÓ«œ∞Ì ¥ŸΩ√ Ω√¿€«ﬂ¿ª∂ß º“∏Æ ª°∏Æ ¿Áª˝æ»µ«∞‘ «œ±‚
             if (time < 15.0f)
             {
                 timeTxt.color = Color.red;
@@ -132,7 +137,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(StopAfterDelay(1.0f)); //?¥Î¶¨?¥Ïãú?êÎèÑ 1.5Ï¥àÌõÑ ?∏Îûò?ïÏ?
                                                       // Í≤åÏûÑ ?¥Î¶¨?¥Ïãú ?úÎèÑ?üÏàò?Ä ?êÏàò ?±Ïû•
                 switchScript.GetComponent<SwitchColor>().resetList();
-                Sname_Text.gameObject.SetActive(true); // ¿Ã∏ß text »∞º∫»≠
+                Sname_Text.gameObject.SetActive(true); // ¿Ã∏ß text »∞º∫»≠                
             }
             firstTracker.SetActive(true);
             secondTracker.SetActive(true);
