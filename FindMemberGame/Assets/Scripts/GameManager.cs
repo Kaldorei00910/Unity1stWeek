@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         audioSource = this.gameObject.GetComponent<AudioSource>();
         cardCount = 16;
-        switchScript.GetComponent<SwitchColor>().resetList(); //?‰ê¹”ë¦¬ìŠ¤??ì´ˆê¸°??
+        switchScript.GetComponent<SwitchColor>().resetList(); //?‰ê¹”ë¦¬ìŠ¤??ì´ˆê¸°??        
     }
 
     void Update()
@@ -77,8 +77,10 @@ public class GameManager : MonoBehaviour
         {
             time -= Time.deltaTime;
             timeTxt.text = time.ToString("N2");
+            timeoveraudioSource.volume = 0.05f;
+            // Å¸ÀÓ¿À¹ö »ç¿îµå Á¶Àý
 
-            if(time > 15.0f)
+            if (time > 15.0f)
             {
                 audioSource.pitch = 1f;
             }
@@ -87,8 +89,7 @@ public class GameManager : MonoBehaviour
             {
                 timeTxt.color = Color.red;
                 timeTxt.fontSize = 70;
-                this.audioSource.pitch = 1.4f;
-                timeTxt.color = Color.red;
+                audioSource.pitch = 1.4f;                
             }
 
             if (time <= 0.0f)
