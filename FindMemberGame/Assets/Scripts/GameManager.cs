@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Text timeTxt;
     public Text name_Text;
     public Text Sname_Text;
+    public Text bestScore;
 
     public GameObject endTxt;
     public GameObject tryTimeTxt;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     public int cardCount = 16;//Ä«µå ÀüÃ¼ °¹¼ö
     public int cardTryCount = 0;
     public int finalpoint = 0;
-
+    public int highScore = 0;
     public float time = 40.0f;
 
     // 40ÃÊºÎÅÍ ½Ã°£ »õ±â
@@ -127,6 +128,10 @@ public class GameManager : MonoBehaviour
                 //float timeÀ» int timeÀ¸·Î º¯°æ(Á¡¼ö¿¡¼­ ¼Ò¼öÁ¡ ´ÜÀ§ Á¦¿Ü)
                 int timeInt = Mathf.FloorToInt(time);
                 point.GetComponent<Text>().text = (finalpoint + timeInt) + "Á¡";
+                if ((finalpoint + timeInt) > instance.highScore)//ÇöÀç ÃÖ°íÁ¡¼öº¸´Ù ³ôÀ» °æ¿ì
+                {
+                    highScore = finalpoint + timeInt;//ÃÖ°íÁ¡¼ö¿¡ ÇöÀç Á¡¼ö µµÀÔ
+                }
                 audioSource.PlayOneShot(stageclearSound); // ?´ë¦¬?´íš¨ê³¼ìŒ
                 StartCoroutine(StopAfterDelay(1.0f)); //?´ë¦¬?´ì‹œ?ë„ 1.5ì´ˆí›„ ?¸ë˜?•ì?
                                                       // ê²Œì„ ?´ë¦¬?´ì‹œ ?œë„?Ÿìˆ˜?€ ?ìˆ˜ ?±ì¥
