@@ -27,7 +27,8 @@ public class UIManager : MonoBehaviour
         GameManager.instance.cardTryCount = 0;
         GameManager.instance.finalpoint = 0;
         GameManager.instance.audioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
-        GameManager.instance.audioSource.GetComponent<AudioSource>().Play();
+
+        GameManager.instance.bestScore.GetComponent<Text>().text = "BestScore : " + GameManager.instance.highScore;
         Debug.Log("초기화 완료");
         GameManager.instance.isGameStart = true;
         Debug.Log("불값 변경true(uimanager)");
@@ -49,6 +50,8 @@ public class UIManager : MonoBehaviour
 
         GameManager.instance.firstTracker = GameObject.Find("Tracker").transform.Find("FirstTracker").gameObject;
         GameManager.instance.secondTracker = GameObject.Find("Tracker").transform.Find("SecondTracker").gameObject;
+
+        GameManager.instance.bestScore = GameObject.Find("Canvas").transform.Find("BestScore").GetComponent<Text>();
 
     }
 

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public Text timeTxt;
     public Text name_Text;
     public Text Sname_Text;
+    public Text bestScore;
 
     public GameObject endTxt;
     public GameObject tryTimeTxt;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     public int cardCount = 16;//카드 전체 갯수
     public int cardTryCount = 0;
     public int finalpoint = 0;
-
+    public int highScore = 0;
     public float time = 40.0f;
 
 
@@ -134,10 +135,16 @@ public class GameManager : MonoBehaviour
                 point.SetActive(true);
                 //float time을 int time으로 변경(점수에서 소수점 단위 제외)
                 int timeInt = Mathf.FloorToInt(time);
+
                 point.GetComponent<Text>().text = (finalpoint + timeInt) + "점";
-                audioSource.PlayOneShot(stageclearSound); 
-                StartCoroutine(StopAfterDelay(1.0f)); 
-                                                      
+                if ((finalpoint + timeInt) > instance.highScore)//현재 최고점수보다 높을 경우
+                {
+                    highScore = finalpoint + timeInt;//최고점수에 현재 점수 도입
+                }
+                audioSource.PlayOneShot(stageclearSound); // ?�리?�효과음
+                StartCoroutine(StopAfterDelay(1.0f)); //?�리?�시?�도 1.5초후 ?�래?��?
+                                                      // 게임 ?�리?�시 ?�도?�수?� ?�수 ?�장
+
                 switchScript.GetComponent<SwitchColor>().resetList();
                 Sname_Text.gameObject.SetActive(true); // 이름 text 활성화                
             }

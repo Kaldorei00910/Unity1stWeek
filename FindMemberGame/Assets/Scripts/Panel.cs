@@ -8,10 +8,13 @@ public class Panel : MonoBehaviour
 {
     public GameObject card;
 
+
     void Start()
     {
+       
         int[] arr = {1,2,3,4,5,6,7,8};
         StartCoroutine(MakeBtn(arr));
+
     }
 
     void Update()
@@ -20,6 +23,7 @@ public class Panel : MonoBehaviour
     }
     IEnumerator MakeBtn(int[] arr)//카드 배열함수(코루틴)
     {
+        int num = 0;
         for (int i = 0; i < 4; i++)
         {
             float x = 180.0f+380;
@@ -31,8 +35,10 @@ public class Panel : MonoBehaviour
                 {
                     x = -180 + 380;
                 }
+                num = num + 1;
                 GameObject go = Instantiate(card, this.transform);
                 go.transform.position = new Vector2(x, y);
+                go.GetComponent<StageBtn>().SetStageBtn(num);
             }      
         }
         yield break;
