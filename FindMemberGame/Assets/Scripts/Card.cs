@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,6 +17,7 @@ public class Card : MonoBehaviour
 
     public SpriteRenderer backColor;
     public GameObject ImageScript;
+
     public string nickname; // 팀원들 이름
     // Start is called before the first frame update
     void Start()
@@ -29,10 +30,10 @@ public class Card : MonoBehaviour
     {
         
     }
-    public void Setting(int number) 
+    public void Setting(int number) //이미지 붙이기 함수
     {
         idx = number;
-        frontImage.sprite = Resources.Load<Sprite>($"easy{idx}");
+        frontImage.sprite = Resources.Load<Sprite>($"easy{idx}"); //이미지 가져오기
 
         switch (number)
         {
@@ -113,18 +114,20 @@ public class Card : MonoBehaviour
 
     public void DestroyCard()
     {
-        Invoke("DestroyCardInvoke",1.0f);
+        Invoke("DestroyCardInvoke",0.5f);
     }
 
     void DestroyCardInvoke()
     {
         Destroy(gameObject);
-        GameManager.instance.Sname_Text.gameObject.SetActive(false);
+        GameManager.instance.Sname_Text.gameObject.SetActive(false); //성공Txt 닫기
+        GameManager.instance.firstTracker.SetActive(true); //성공 이펙트 켜기
+        GameManager.instance.secondTracker.SetActive(true);
     }
 
     public void CloseCard()
     {
-        Invoke("CloseCardInvoke",1.0f);
+        Invoke("CloseCardInvoke",0.5f);
     }
 
     void CloseCardInvoke()
@@ -133,11 +136,7 @@ public class Card : MonoBehaviour
         front.SetActive(false);
         back.SetActive(true);
         this.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-        //GameManager.instance.close_nameText();
-
-
-        GameManager.instance.name_Text.gameObject.SetActive(false);
+        GameManager.instance.FailTxt.gameObject.SetActive(false); //실패Txt 닫기
 
     }
 
@@ -163,7 +162,5 @@ public class Card : MonoBehaviour
         {
             ImageScript.GetComponent<ImageChange>().ChangeBlack();
         }
-        
-
     }
 }

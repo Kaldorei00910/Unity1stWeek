@@ -24,14 +24,13 @@ public class GameManager : MonoBehaviour
     public Card beforeSecond;
 
     public Text timeTxt;
-    public Text name_Text;
+    public Text FailTxt;
     public Text Sname_Text;
     public Text bestScore;
 
     public GameObject endTxt;
     public GameObject tryTimeTxt;
     public GameObject point;
-
     public GameObject firstTracker;
     public GameObject secondTracker;
 
@@ -116,8 +115,6 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.idx == secondCard.idx)
         {
-            Sname_Text.text = "국기웅,이영대,이유신,금재은";
-
             firstCard.DestroyCard();
             secondCard.DestroyCard();
             audioSource.PlayOneShot(successSound);//오디오소스 재생
@@ -125,11 +122,13 @@ public class GameManager : MonoBehaviour
             cardTryCount += 1; //시도횟수 카운트
             finalpoint += 10; // 매칭 성공 점수
 
-            Sname_Text.text = firstCard.nickname; //매칭 성공 시 출력되는 이름
+            Sname_Text.text = firstCard.nickname; //
             Sname_Text.gameObject.SetActive(true); // 성공시 이름 text 활성화 
 
             if (cardCount == 0)
             {
+                firstCard.DestroyCard();
+                secondCard.DestroyCard();
                 endTxt.SetActive(true);
                 tryTimeTxt.SetActive(true);
                 tryTimeTxt.GetComponent<Text>().text = "총 " + cardTryCount + "회 시도";
@@ -142,26 +141,23 @@ public class GameManager : MonoBehaviour
                 {
                     highScore = finalpoint + timeInt;//최고점수에 현재 점수 도입
                 }
-                audioSource.PlayOneShot(stageclearSound); // ?�리?�효과음
-                StartCoroutine(StopAfterDelay(1.0f)); //?�리?�시?�도 1.5초후 ?�래?��?
-                                                      // 게임 ?�리?�시 ?�도?�수?� ?�수 ?�장
+                audioSource.PlayOneShot(stageclearSound); 
+                StartCoroutine(StopAfterDelay(1.0f));
 
                 switchScript.GetComponent<SwitchColor>().resetList();
                 Sname_Text.gameObject.SetActive(true); // 이름 text 활성화                
             }
-            firstTracker.SetActive(true);
-            secondTracker.SetActive(true);
         }
         else
         {
-            name_Text.text = "실패!!";
+            FailTxt.text = "실패!!";
             firstCard.CloseCard();
             secondCard.CloseCard();
             audioSource.PlayOneShot(failSound);//오디오소스 재생
             cardTryCount += 1; //시도횟수 카운트
             finalpoint -= 2; //매칭 실패 점수
-            time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 
-            name_Text.gameObject.SetActive(true); // 이름 text 활성화
+            time -= 2.0f;//실패했을 시 남는시간이 더 줄어들게 2초감소
+            FailTxt.gameObject.SetActive(true); // 이름 text 활성화
             switchScript.GetComponent<SwitchColor>().switchColor();
         }
         StopCoroutine("CountDown"); 
@@ -170,11 +166,6 @@ public class GameManager : MonoBehaviour
         beforeSecond = secondCard;
         firstCard = null;
         secondCard = null;
-    }
-
-    public void close_nameText()
-    {
-        name_Text.gameObject.SetActive(false);
     }
 
     public IEnumerator CountDown()
@@ -253,15 +244,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         audioSource.Stop();
         audioSource.pitch = 1f;
-    }
-
-    public void close_name_Text()
-    {
-        name_Text.gameObject.SetActive(false);
-    }
-    public void close_Sname_Text()
-    {
-        Sname_Text.gameObject.SetActive(false);
     }
 
     public void BlackOver()

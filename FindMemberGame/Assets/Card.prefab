@@ -347,6 +347,8 @@ MonoBehaviour:
   click: {fileID: 8300000, guid: f1504e8d8141aa942ba06870ed006f0f, type: 3}
   front: {fileID: 9047886293447330735}
   back: {fileID: 2291083540533599446}
+  firstTracker: {fileID: 7186232870059445487, guid: 366908287b3ca014c8e95c1f683dc562, type: 3}
+  secondTracker: {fileID: 6645667577529716170, guid: ccaa2009c20a48f49a1badabc45264f6, type: 3}
   anim: {fileID: 636105099797133360}
   frontImage: {fileID: 4374452412846632294}
   backColor: {fileID: 4898572320361452631}

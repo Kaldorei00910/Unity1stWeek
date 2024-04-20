@@ -51,15 +51,12 @@ public class UIManager : MonoBehaviour
         GameManager.instance.countDown.SetActive(false);
         GameManager.instance.point = GameObject.Find("Canvas").transform.Find("Point").gameObject;
         GameManager.instance.endTxt = GameObject.Find("Canvas").transform.Find("EndTxt").gameObject;
-        GameManager.instance.name_Text = GameObject.Find("Canvas").transform.Find("nameTxt").GetComponent<Text>();
+        GameManager.instance.FailTxt = GameObject.Find("Canvas").transform.Find("FailTxt").GetComponent<Text>();
         GameManager.instance.Sname_Text = GameObject.Find("Canvas").transform.Find("Sname_Text").GetComponent<Text>();
         GameManager.instance.tryTimeTxt = GameObject.Find("Canvas").transform.Find("TryTimeTxt").gameObject;
-
+        GameManager.instance.bestScore = GameObject.Find("Canvas").transform.Find("BestScore").GetComponent<Text>();
         GameManager.instance.firstTracker = GameObject.Find("Tracker").transform.Find("FirstTracker").gameObject;
         GameManager.instance.secondTracker = GameObject.Find("Tracker").transform.Find("SecondTracker").gameObject;
-
-        GameManager.instance.bestScore = GameObject.Find("Canvas").transform.Find("BestScore").GetComponent<Text>();
-
     }
 
 
