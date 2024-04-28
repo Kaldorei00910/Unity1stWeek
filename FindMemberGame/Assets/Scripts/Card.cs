@@ -164,5 +164,5 @@ public class Card : MonoBehaviour
         }
     }
 
-    //머지하는방법 연습중...
+    //머지하는방법 연습중.
 }
