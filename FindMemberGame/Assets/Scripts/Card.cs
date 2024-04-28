@@ -163,4 +163,6 @@ public class Card : MonoBehaviour
             ImageScript.GetComponent<ImageChange>().ChangeBlack();
         }
     }
+
+    //머지하는방법 연습중...
 }
